@@ -95,6 +95,12 @@ $f(a) = f(a^\prime)$.
     men det finnes ingen avbildning $A\to \emptyset$ med mindre $A = \emptyset$.
 \end{remark}
 
+\begin{example}
+    Om vi har to avbildninger $A\xrightarrow{f} B\xrightarrow{g} C$
+    kan vi lage en ny avbildning $g\circ f\colon A\to C$
+    ved å sende $g\circ f(a) = g(f(a))$ for alle $a\in A$.
+\end{example}
+
 \begin{definition}
     En avbildning $f\colon A\to B$ er \textit{injektiv} om for alle $a,b\in A$ med $a\neq b$
     så er $f(a)\neq f(b)$.
@@ -328,16 +334,58 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     Vi kjenner allerede til mange eksempler på grupper,
     slik som kjeden av delmengder
     \[
-        \mathbb N
-        \subset \mathbb Z
+        \mathbb Z
         \subset \mathbb Q
         \subset \mathbb R
-        \subset \mathbb C.
+        \subset \mathbb C
     \]
+    hvor vi lar $\mathbb C = (\mathbb C, +)$ være en gruppe under addisjon
+    danner en kjede av delgrupper.
+    Merk at $\mathbb N$ ikke er en gruppe under addisjon siden det ikke finnes
+    invers elementer.
+
+    Om vi fjerner $0$ fra alle mengdene
+    \[
+        \mathbb Q^\times
+        \subset \mathbb R^\times
+        \subset \mathbb C^\times
+    \]
+    og utruster $\mathbb C$ med multiplikasjon isteden,
+    så danner dette en kjede med delgrupper.
 \end{example}
+
+\begin{example}
+    Om $(G, \ast_G), (H, \ast_H)$ er to grupper så danner $(G\times H, \ast)$
+    en gruppe hvor $\ast$ er operatoren
+    \[
+        (g, h)\ast (g^\prime, h^\prime)
+        = (g \ast_G g^\prime, h\ast_H h^\prime).
+    \]
+    Til eksempel er det reelle planet $\mathbb R^2$ en gruppe under vektor-addisjon.
+\end{example}
+
+\begin{example}
+    La $\mathrm{Bij}(A)$ være mengden av bijeksjoner $A\to A$.
+    Da er $(\mathrm{Bij}(A), \circ)$ en gruppe.
+\end{example}
+
+\begin{example}
+    Mengden $\mathrm{Mat}_{2\times 2}$ av $(2\times 2)$-matriser under addisjon
+    danner en gruppe.
+\end{example}
+
+\begin{example}
+    Mengden $\mathrm{GL}_2(\mathbb R)$ av inverterbare $(2\times2)$-matriser
+    med koeffisienter i $\mathbb R$
+    danner en gruppe under matrise multiplikasjon.
+\end{example}
+
+\todo{Bilde og kjerne}
 
 \subsection{Oppgaver}
 \begin{enumerate}
+    \item Finn enhetselementet og inverselementene til alle eksemplene på
+        grupper nevnt ovenfor.
     \item Vis at det bare finnes ett element $e\in G$ slik
         at $e \ast g = g\ast e = g$ for alle $g\in G$,
         altså at identitetselementet er unikt.
@@ -346,3 +394,93 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     \item Vis at for en morfi $f\colon G\to H$
         så har vi for alle $g\in G$ at $f(g^{-1}) = {f(g)}^{-1}$.
 \end{enumerate}
+
+\subsection{Mer om grupper}
+
+\begin{definition}
+    En gruppe $(G, \ast)$ er \textit{abelsk} om
+    for alle $g,h\in G$ har vi $g\ast h = h\ast g$.
+\end{definition}
+
+\begin{example}
+    Alle eksemplene er med addisjon som gruppeoperator ovenfor er abelske.
+    Generelt, om vi benevner en operator med symbolet ``$+$'' så er operatoren
+    kommutativ.
+\end{example}
+
+\begin{example}
+    Gruppen av inverterbare $(2\times 2)$-matriser under multiplikasjon
+    $\mathrm{GL}_2(\mathbb R)$
+    er ikke abelsk, siden til eksempel
+    \[
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 1\\
+            1 & 2
+        \end{bmatrix}
+    \]
+    mens
+    \[
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 1\\
+            1 & 2
+        \end{bmatrix}.
+    \]
+\end{example}
+
+\begin{definition}
+    La $H\subset G$ være en undergruppe.
+    Et \textit{coset} av $H$ i $G$ er en mengde på formen
+    \[
+        gH = \{gh\mid h\in H\}
+    \]
+    for en $g\in H$.
+    Merk at $g\in gH$ siden $e\in H$.
+\end{definition}
+
+\begin{lemma}
+    La $g, g^\prime$ være to elementer i $G$,
+    og la $H\subset G$ være en undergruppe av $G$.
+    Vi har
+    \[
+        gH = g^\prime H
+    \]
+    hvis og bare hvis $g^{-1} g^\prime\in H$.
+\end{lemma}
+\begin{proof}
+    \todo[inline]{Bevis dette}
+\end{proof}
+
+\begin{corollary}
+    Om $gH\cap g^\prime H\neq \emptyset$ så har vi $gH = g^\prime H$.
+\end{corollary}
+
+\begin{corollary}
+    Cosetene til $H\subset G$ danner en partisjon av $G$.
+\end{corollary}
+
+\begin{definition}
+    En delgruppe $H\subset G$ er \textit{normal}
+    dersom
+    \[
+        gH = Hg = \{hg\mid h\in H\}
+    \]
+    for alle $g\in G$.
+\end{definition}
