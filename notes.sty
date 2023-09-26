@@ -1,4 +1,37 @@
 \ProvidesPackage{notes}
 
 \RequirePackage{csquotes}
+\RequirePackage{microtype}
+\RequirePackage[norsk]{babel}
+\RequirePackage[T1]{fontenc}
 \RequirePackage[backend=biber, style=alphabetic]{biblatex}
+
+\RequirePackage[obeyFinal]{todonotes}
+\RequirePackage{enumitem}
+\RequirePackage[hidelinks, pdfusetitle]{hyperref}
+
+\RequirePackage{amsmath}
+\RequirePackage{mathdots}
+\numberwithin{equation}{section}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{mathrsfs}
+\RequirePackage{tikz-cd}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorem}[section]
+\newtheorem{proposition}[theorem]{Proposisjon}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Korollar}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definisjon}
+\newcommand{\definitionautorefname}{Definisjon}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Bemerkning}
+\newtheorem{example}[theorem]{Eksempel}
+\newcommand{\remarkautorefname}{Bemerkning}
+\newcommand{\exampleautorefname}{Eksempel}
+
+\DeclareMathOperator{\id}{id}
