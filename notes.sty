@@ -8,7 +8,6 @@
 
 \RequirePackage[obeyFinal]{todonotes}
 \RequirePackage{enumitem}
-\RequirePackage[hidelinks, pdfusetitle]{hyperref}
 
 \RequirePackage{amsmath}
 \RequirePackage{mathdots}
@@ -18,11 +17,20 @@
 \RequirePackage{mathrsfs}
 \RequirePackage{tikz-cd}
 
+\RequirePackage[hidelinks, pdfusetitle]{hyperref}
+\RequirePackage[
+    norsk,
+    nameinlink,
+    capitalize,
+    noabbrev
+]{cleveref}
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorem}[section]
 \newtheorem{proposition}[theorem]{Proposisjon}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Korollar}
+\newcommand{\corollaryautorefname}{Korollar}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definisjon}
@@ -35,3 +43,5 @@
 \newcommand{\exampleautorefname}{Eksempel}
 
 \DeclareMathOperator{\id}{id}
+%\DeclareMathOperator{\ker}{ker}
+\DeclareMathOperator{\im}{im}

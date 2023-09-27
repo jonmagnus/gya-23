@@ -56,9 +56,18 @@ Det finnes også samlinger av objekter som ikke danner mengder.
 \end{remark}
 
 \begin{definition}
-    En avbildning $f\colon A\to B$ mellom to mengder er en
+    En \textit{avbildning} $f\colon A\to B$ mellom to mengder er en
     regel som for ethvert element $a\in A$ assosierer et element
     $b = f(a)\in A$.
+
+    Vi kaller $A$ \textit{definisjonsmengden} til $f$
+    og $B$ \textit{verdimengden}.
+    Vi definerer også en delmengde av $B$
+    \[
+        \im f = \{b\in B\mid \mbox{det finnes $a\in A$ slik at } f(a) = b\}
+        \subset B
+    \]
+    som vi kaller \textit{bildet} av $f$.
 
     Vi tegner ofte opp avbildninger som piler,
     så om vi har flere mengder $A, B, C$, men flere avbildninger
@@ -116,7 +125,7 @@ $f(a) = f(a^\prime)$.
     og sier $f$ er en \textit{bijeksjon}.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{thm:set-inverse-function}
     Om $f\colon A\to B$ er en bijeksjon så finnes en unik avbildning
     $g\colon B\to A$ slik at $f\circ g = \id_B$ og $g\circ f = \id_A$,
     dvs.
@@ -124,7 +133,14 @@ $f(a) = f(a^\prime)$.
     Vi kaller $g$ \textit{inversavbildningen} til $f$ og skriver $f^{-1} = g$.
 \end{lemma}
 \begin{proof}
-    \todo[inline]{Skriv bevis}
+    Definer en regel $g\colon B\to A$ som for hver $b\in B$ finner en $a\in A$
+    slik at $f(a) = b$.
+    En slik $a$ finnes alltid for enhver $b$ siden $f$ er surjektiv.
+
+    La $g^\prime$ være en annen funksjon konstruert på samme måte,
+    det vil si $g^\prime$ tilfredsstiller $f(g^\prime(b)) = b$ for alle $b\in B$.
+    Men $f(g(b)) = b = f(g^\prime(b))$ og $f$ er injektiv, så $g(b) = g^\prime(b)$
+    for alle $b\in B$, så $g = g^\prime$.
 \end{proof}
 
 \begin{example}
@@ -166,6 +182,13 @@ $f(a) = f(a^\prime)$.
     Vi har $\{1,\dots,10\}\cap \{5,\dots,15\} = \{5, 6, 7, 8, 9, 10\}$,
     og $\{1,\dots, 10,\}\cup \{5,\dots, 15\} = \{1,\dots, 15\}$.
 \end{example}
+
+\begin{definition}
+    Vi kan ta \textit{komplementet} av to mengder $A, B$
+    \[
+        A\setminus B = \{ a\in A\mid a\notin B\} \subset A.
+    \]
+\end{definition}
 
 \begin{example}
     Vi kan ta produktet av to mengder $A, B$.
@@ -248,7 +271,7 @@ $f(a) = f(a^\prime)$.
     er like om $f(a) = g(a)$ for alle $a\in A$.
 \end{example}
 
-\subsection{Oppgaver}
+\subsubsection*{Oppgaver}
 
 \begin{enumerate}
     \item Vis at om $f\colon A\hookrightarrow B$ er en injeksjon
@@ -266,6 +289,11 @@ $f(a) = f(a^\prime)$.
             \item
                 Om $g\circ f$ er en bijeksjon, må $f$ eller $g$ være en bijeksjon?
         \end{enumerate}
+    \item La $U$ være en mengde, og $A, B\subset U$ to delmengder.
+        Vis identiteten
+        \[
+            U\setminus(A\cap B) = (U\setminus A)\cup (U\setminus B).
+        \]
     \item La $A, B$ være to endelige mengder, og la $n = \# A$ og $m=\# B$,
         vis at da er $\# \mathrm{Map}(A,B) = m^n$.
         Dette motiverer hvorfor flere forfattere velger å skrive
@@ -274,6 +302,40 @@ $f(a) = f(a^\prime)$.
         og la $f\colon A\to B$ være en bijeksjon.
         Vis at avbildningen $\tilde f\colon \mathrm{Bij}(A)\to \mathrm{Bij}(B)$
         gitt ved $s\mapsto f\circ s\circ f^{-1}$ er en bijeksjon.
+\end{enumerate}
+Mengdeteoretisk definerer vi ofte en avbildning $A\to B$ som en samling data
+$(A, B, \Gamma)$ med $\Gamma\subset A\times B$ slik at for alle $a\in A$
+så finnes en unik $b\in B$ slik at $(a,b)\in \Gamma$.
+Denne delmengden $\Gamma$ kalles \textit{grafen} til funksjonen,
+for om vi skal gi den tilhørende ``regelen'' $f$ får vi $f(a) = b$
+for alle $(a,b)\in \Gamma$.
+
+\begin{remark}
+    Merk at for en $A\to B$ er både $A$ og $B$ del av
+    dataen, så for to avbildninger $f, g$ med definisjonsmengde
+    $A$ og samme graf $\Gamma_f = \Gamma_g$ så kan de være forskjellige
+    om de har forskjellige verdimengder $B_f, B_g$,
+    til eksempel om $B_g\subsetneq B_f$.
+\end{remark}
+\begin{example}
+    La $f\colon \mathbb Z\to \mathbb Z$ og
+    $g\colon \mathbb Z\to 2\mathbb Z$
+    hvor
+    \[
+        2\mathbb Z = \{2n \mid n\in \mathbb Z\}\subset \mathbb Z.
+    \]
+    Både $f$ og $g$ er gitt ved $f(n) = g(n) = 4n$ for alle $n\in \mathbb Z$,
+    så de har samme bilde i $\im f = \im g\subset\mathbb Z$,
+    men de har forskjellig verdimengde, så $f\neq g$.
+\end{example}
+\begin{enumerate}[resume]
+    \item
+        \begin{enumerate}
+            \item Hva betyr det for $\Gamma$ at $f$ er injektiv?
+            \item Hva betyr det for $\Gamma$ at $f$ er surjektiv?
+            \item Kan du bevise \cref{thm:set-inverse-function} på en annen
+                måte ved å bruke denne nye definisjonen av en avbildning?
+        \end{enumerate}
 \end{enumerate}
 
 \subsection{Gruppeteori}
@@ -323,7 +385,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 \end{definition}
 
 \begin{remark}
-    Inklusjonen av en delgruppe
+    Inklusjonen av en delgruppe $H\subset G$
     \[
         H\hookrightarrow G
     \]
@@ -382,7 +444,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 
 \todo{Bilde og kjerne}
 
-\subsection{Oppgaver}
+\subsubsection*{Oppgaver}
 \begin{enumerate}
     \item Finn enhetselementet og inverselementene til alle eksemplene på
         grupper nevnt ovenfor.
@@ -439,8 +501,8 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
         \end{bmatrix}
         =
         \begin{bmatrix}
-            1 & 1\\
-            1 & 2
+            2 & 1\\
+            1 & 1
         \end{bmatrix}.
     \]
 \end{example}
@@ -465,16 +527,68 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     hvis og bare hvis $g^{-1} g^\prime\in H$.
 \end{lemma}
 \begin{proof}
-    \todo[inline]{Bevis dette}
+    Anta at $g H = g^\prime H$,
+    så for alle $h\in H$ finnes en $h^\prime\in H$
+    slik at $gh = g^\prime h^\prime$,
+    men da kan vi regne
+    \[\begin{aligned}
+        gh &= g^\prime h^\prime \\
+        g^{-1} gh = h
+           &= g^{-1} g^\prime h^\prime \\
+        h {(h^\prime)}^{-1}
+           &= g^{-1} g^\prime h^\prime {(h^\prime)}^{-1}
+            = g^{-1} g^\prime
+    \end{aligned}\]
+    så $g^{-1}g^\prime = h {(h^\prime)}^{-1}\in H$ siden $H$ er en delgruppe.
+
+    For den andre veien anta at $g^{-1} g^\prime \in H$.
+    Anta for motsigelse at $gH\neq g^\prime H$,
+    så ved symmetri kan vi anta (``uten tap av generalitet'')
+    at det finnes et element $gh\in gH$
+    \todo{Er setminus definert?}
+    slik at $gh\notin g^\prime H$.
+    Men $g^{-1} g^\prime \in H$,
+    så $h^\prime = {(g^{-1} g^\prime)}^{-1} h\in H$,
+    så $gh = g (g^{-1}g^\prime) h^\prime = g^\prime h^\prime \in g^\prime H$,
+    men vi antok at $gh\notin g^\prime H$, så vi har en motsigelse.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{thm:coset-no-partial-intersection}
     Om $gH\cap g^\prime H\neq \emptyset$ så har vi $gH = g^\prime H$.
 \end{corollary}
 
 \begin{corollary}
-    Cosetene til $H\subset G$ danner en partisjon av $G$.
+    Cosetene til $H\subset G$ danner en \textit{partisjon} av $G$,
+    det vil si vi kan finne en \textbf{delmengde} (ikke en gruppe) elementer
+    $S\subset G$ slik at $gH \cap g^\prime H = \emptyset$ for alle $g,g^\prime\in S$
+    med $g\neq g^\prime$, og
+    \[
+        \bigcup_{g\in S} gH = G.
+    \]
 \end{corollary}
+\begin{proof}
+    La $\mathcal S$ være mengden delmengder $S\subset G$ slik at
+    for alle $g,g^\prime \in G$ så har vi $gH\cap g^\prime = \emptyset$
+    for $g\neq g^\prime$.
+    Anta $\tilde S\in \mathcal S$ er maksimal, det vil si det finnes ingen
+    $S\in \mathcal S$ slik at $\tilde S\subsetneq S$.
+    Vi påstår at $\bigcup_{g\in \tilde S} gH = G$.
+    Anta for motsigelse at det finnes en $g^\prime\in G$ slik at
+    $g^\prime\notin \bigcup_{g\in \tilde S} gH$.
+    Da har vi at $g^\prime H\cap gH = \emptyset$ for alle $g\in \tilde S$,
+    for ellers har vi $g^\prime \in gH$ ved \cref{thm:coset-no-partial-intersection},
+    men da har vi at $\tilde S\cup \{g^\prime\}\in\mathcal S$
+    som motsier at $\tilde S$ er maksimal,
+    så det finnes ingen slik $g^\prime$ og $\bigcup_{s\in\tilde S} gH = G$.
+\end{proof}
+
+\begin{remark}
+    Hvordan vet vi egentlig at det i det hele tatt finnes en maksimal
+    mengde $\tilde S$ i $\mathcal S$?
+    Om gruppen er uendelig kan man tenke seg at vi alltid
+    har plass til å legge til flere og flere elementer til $\tilde S$,
+    på samme måte som vi alltid kan
+\end{remark}
 
 \begin{definition}
     En delgruppe $H\subset G$ er \textit{normal}
@@ -484,3 +598,99 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     \]
     for alle $g\in G$.
 \end{definition}
+
+\begin{lemma}
+    La $f\colon G\to H$ være en morfi.
+    Da er $\ker f\subset G$ en normal delgruppe.
+\end{lemma}
+\begin{proof}
+    \todo[inline]{Bevis dette}
+    \todo{Definer kerne og bilde av en gruppe.}
+\end{proof}
+
+\subsubsection*{Oppgaver}
+
+\begin{enumerate}
+    \item Bevis \cref{thm:coset-no-partial-intersection}
+\end{enumerate}
+
+\subsection{Endelige abelske grupper}
+
+\begin{definition}
+    La $G$ være en gruppe.
+    En delgruppe $H\subset G$ er \textit{ekte}
+    om $H\neq \{e\}$ og $H\neq G$.
+
+    En gruppe $G$ er \textit{simpel} om $G$ ikke har noen ekte delgrupper.
+\end{definition}
+
+\begin{theorem}
+    Endelige grupper av prim orden er simple.
+    \todo{Er dette relevant?}
+\end{theorem}
+
+\begin{lemma}\label{thm:binomial-identity}
+    La $x,y\in \mathbb Z$  og $n \geq 1$ være heltall.
+    Da har vi formelen
+    \[
+        (x + y)^n = \sum_{i = 0}^n \binom n i x^i y^{n - i}.
+    \]
+\end{lemma}
+
+Av og til tar vi dette som definisjonen av \textit{binomialkoeffisientene}
+$\binom n m$,
+men om vi heller bruker definisjonen fra Pascals trekant $\binom n 0 = \binom n n = 1$
+for alle $n\in\mathbb N$ og $\binom n {m - 1} + \binom n m = \binom {n + 1} m$
+for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følger.
+\begin{proof}
+    Tilfellet $n = 1$ er enkelt siden
+    $(x + y)^1 = x + y$ og $\binom 1 0 = \binom 1 1 = 1$.
+
+    Anta $(x + y)^k = \sum_{i = 0}^k \binom k i x^i y^{k - i}$.
+    Vi har
+    \[\begin{aligned}
+        (x + y)^{k + 1}
+        &=  (x + y)(x + y)^k
+        \\
+        &= (x + y)\sum_{i = 0}^k \binom k i x^i y^{k - i}
+        \\
+        &= \sum_{i = 0}^k \binom k i x^{i + 1} y^{k - i}
+        + \sum_{i = 0}^k \binom k i x^{i} y^{k - i + 1}
+        \\
+        &= \sum_{i = 1}^{k + 1} \binom k {i - 1} x^{i} y^{(k + 1) - i}
+        + \sum_{i = 0}^k \binom k i x^{i} y^{(k + 1) - i}
+        \\
+        &= \sum_{i = 0}^{k + 1} \binom {k + 1} i x^{i} y^{(k + 1) - i}
+    \end{aligned}\]
+\end{proof}
+
+\begin{corollary}{Fermats lille teorem}
+    La $p$ være et primtall.
+    Da har vi at
+    \[
+        a^p \cong a \mod p
+    \]
+    for alle $a\in \mathbb Z$.
+\end{corollary}
+\begin{proof}
+    Vi definerer en avbildning $\pi_p\colon \mathbb Z / p\to\mathbb Z / p$
+    ved $a\mapsto a^p$.
+    La $a,b\in \mathbb Z$.
+    Vi ser at
+    \[\begin{aligned}
+        \pi_p(a + b)
+        &= (a + b)^p
+        \\
+        &= \sum_{i = 0}^p \binom p i a^i b^{p - i}
+        \\
+        &= a^p + b^p
+        \\
+        &= \pi_p(a) + \pi_p(b)
+    \end{aligned}\]
+    siden $p|\binom p i$ for $i\neq 0, p$,
+    så $\pi_p$ er en morfi.
+    Vi ser også at $\pi_p(1) = 1^p = 1$,
+    og det er bare \`en morfi $\mathbb Z / p\to \mathbb Z / p$
+    som tilfredsstiller dette, nemlig identiteten $\id_{\mathbb Z / p}$,
+    så $\pi_p = \id_{\mathbb Z / p}$.
+\end{proof}
