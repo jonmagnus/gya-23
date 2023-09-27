@@ -1,4 +1,4 @@
-\documentclass[norks]{article}
+\documentclass[norks, final]{article}
 
 \usepackage{notes}
 
@@ -6,6 +6,12 @@
 
 \author{Jon-Magnus Rosenblad}
 \title{Intro til Kryptografi}
+
+\includeonly{%
+    sections/set-theory,
+    sections/group-theory,
+    %sections/finite-abelian-groups,
+}
 
 \begin{document}
 
@@ -15,8 +21,11 @@
 \listoftodos
 
 %\include{sections/introduction}
+\include{sections/set-theory}
 \include{sections/group-theory}
+\include{sections/finite-abelian-groups}
 
+\todo[inline]{
 \begin{verbatim}
 - Set theory
     - Difference between sets and tuples
@@ -50,6 +59,7 @@
     - The kernel is normal
     - Chinese remainder theorem/Clasification of finite abelian groups
 \end{verbatim}
+}
 
 \printbibliography
 

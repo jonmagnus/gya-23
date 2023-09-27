@@ -1,0 +1,80 @@
+\section{Endelige abelske grupper}
+
+\begin{definition}
+    La $G$ være en gruppe.
+    En undergruppe $H\subset G$ er \textit{ekte}
+    om $H\neq \{e\}$ og $H\neq G$.
+
+    En gruppe $G$ er \textit{simpel} om $G$ ikke har noen ekte undergrupper.
+\end{definition}
+
+\begin{theorem}
+    Om $A$ er en endelig abelsk gruppe, og $\# A$ er et primtall,
+    da er $A$ simpel.
+\end{theorem}
+
+\begin{lemma}\label{thm:binomial-identity}
+    La $x,y\in \mathbb Z$  og $n \geq 1$ være heltall.
+    Da har vi formelen
+    \[
+        (x + y)^n = \sum_{i = 0}^n \binom n i x^i y^{n - i}.
+    \]
+\end{lemma}
+
+Av og til tar vi dette som definisjonen av \textit{binomialkoeffisientene}
+$\binom n m$,
+men om vi heller bruker definisjonen fra Pascals trekant $\binom n 0 = \binom n n = 1$
+for alle $n\in\mathbb N$ og $\binom n {m - 1} + \binom n m = \binom {n + 1} m$
+for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følger.
+\begin{proof}
+    Tilfellet $n = 1$ er enkelt siden
+    $(x + y)^1 = x + y$ og $\binom 1 0 = \binom 1 1 = 1$.
+
+    Anta $(x + y)^k = \sum_{i = 0}^k \binom k i x^i y^{k - i}$.
+    Vi har
+    \[\begin{aligned}
+        (x + y)^{k + 1}
+        &=  (x + y)(x + y)^k
+        \\
+        &= (x + y)\sum_{i = 0}^k \binom k i x^i y^{k - i}
+        \\
+        &= \sum_{i = 0}^k \binom k i x^{i + 1} y^{k - i}
+        + \sum_{i = 0}^k \binom k i x^{i} y^{k - i + 1}
+        \\
+        &= \sum_{i = 1}^{k + 1} \binom k {i - 1} x^{i} y^{(k + 1) - i}
+        + \sum_{i = 0}^k \binom k i x^{i} y^{(k + 1) - i}
+        \\
+        &= \sum_{i = 0}^{k + 1} \binom {k + 1} i x^{i} y^{(k + 1) - i}
+    \end{aligned}\]
+\end{proof}
+
+\begin{corollary}{Fermats lille teorem}
+    La $p$ være et primtall.
+    Da har vi at
+    \[
+        a^p \cong a \mod p
+    \]
+    for alle $a\in \mathbb Z$.
+\end{corollary}
+\begin{proof}
+    Vi definerer en avbildning $\pi_p\colon \mathbb Z / p\to\mathbb Z / p$
+    ved $a\mapsto a^p$.
+    La $a,b\in \mathbb Z$.
+    Vi ser at
+    \[\begin{aligned}
+        \pi_p(a + b)
+        &= (a + b)^p
+        \\
+        &= \sum_{i = 0}^p \binom p i a^i b^{p - i}
+        \\
+        &= a^p + b^p
+        \\
+        &= \pi_p(a) + \pi_p(b)
+    \end{aligned}\]
+    siden $p|\binom p i$ for $i\neq 0, p$,
+    så $\pi_p$ er en morfi.
+    Vi ser også at $\pi_p(1) = 1^p = 1$,
+    og det er bare \`en morfi $\mathbb Z / p\to \mathbb Z / p$
+    som tilfredsstiller dette, nemlig identiteten $\id_{\mathbb Z / p}$,
+    så $\pi_p = \id_{\mathbb Z / p}$.
+\end{proof}

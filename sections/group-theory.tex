@@ -1,345 +1,5 @@
 \section{Gruppeteori}
 
-\subsection{Grunnleggende notasjon og mengdeteori}
-
-
-\begin{definition}
-    En \textit{mengde} er en samling objekter $S$ hvor vi kan for
-    ethvert objekt $e$ vite om $e$ tilhører $S$, skrevet $e\in S$,
-    eller ikke, skrevet $e\notin S$.
-
-    Objektene som tilhører en mengde kalles \textit{elementene}
-    i mengden.
-\end{definition}
-
-Vi noterer ofte en mengde med elementene den inneholder,
-til eksempel skriver vi de naturlige tallene som
-\[
-    \mathbb N = \{0, 1, 2, \dots\}.
-\]
-\begin{example}
-    De naturlige tallene $\mathbb N$, heltallene $\mathbb Z$,
-    de rasjonale tallene $\mathbb Q$,
-    de reelle tallene $\mathbb R$
-    og de komplekse tallene $\mathbb C$ danner alle mengder.
-
-    Det finnes en tom mengde $\emptyset = \{\}$,
-    og vi kan lage mengder av mengder,
-    slik som mengden av den tomme mengden $\{\emptyset\}\neq\emptyset$.
-\end{example}
-
-Det finnes også samlinger av objekter som ikke danner mengder.
-\begin{example}
-    Samlingen av alle mengder som ikke inneholder seg selv er ikke en mengde.
-    Om vi snakker om samlinger som ikke er mengder fremhever vi ofte at de ikke
-    er mengder ved å bruke for eksempel klammeparenteser,
-    så denne samlingen kan skrives som
-    \[
-        \left[
-            S
-            \mid
-            S\notin S
-        \right]
-    \]
-\end{example}
-
-\begin{remark}
-    Et element er enten med i en mengde eller ikke
-    -- det finnes ingen id\`e om flere av det samme elementet i en mengde.
-    Altså om vi har $S = \{a,b\}$, men $a = b = 1$,
-    så vil $S = \{1\}$.
-
-    Om vi vil ha flere elementer, og samtidig bryr oss om rekkefølgen av elementer
-    så bruker vi en \textit{tuppel} $(a,b)$,
-    så om $a = b = 1$ har vi $(a, b) = (1,1) \neq (1)$,
-    men for $a\neq b$ har vi $(a, b)\neq (b, a)$.
-\end{remark}
-
-\begin{definition}
-    En \textit{avbildning} $f\colon A\to B$ mellom to mengder er en
-    regel som for ethvert element $a\in A$ assosierer et element
-    $b = f(a)\in A$.
-
-    Vi kaller $A$ \textit{definisjonsmengden} til $f$
-    og $B$ \textit{verdimengden}.
-    Vi definerer også en delmengde av $B$
-    \[
-        \im f = \{b\in B\mid \mbox{det finnes $a\in A$ slik at } f(a) = b\}
-        \subset B
-    \]
-    som vi kaller \textit{bildet} av $f$.
-
-    Vi tegner ofte opp avbildninger som piler,
-    så om vi har flere mengder $A, B, C$, men flere avbildninger
-    $f\colon A\to B, g\colon A\to C, h\colon B\to C$
-    imellom seg kan vi tegne det opp som
-    \[
-        \begin{tikzcd}
-            A
-            \ar{rr}{f}
-            \ar{rd}{g}
-            &&
-            B
-            \ar{ld}{h}
-            \\
-            &
-            C.
-        \end{tikzcd}
-    \]
-\end{definition}
-
-For ethvert element $a\in A$ finnes det bare \`en verdi for $f(a)\in B$.
-Derimot kan flere verdier $a, a^\prime$ avbilde på samme verdi
-$f(a) = f(a^\prime)$.
-
-\begin{example}
-    For enhver mengde $A$ finnes det en naturlig avbildning
-    $\id_A\colon A\to A$ som sender hvert element $a\in A$
-    på seg selv $a\mapsto a$
-\end{example}
-
-\begin{remark}
-    Merk at for enhver mengde $A$ så finnes det
-    nøyaktig en avbildning $\emptyset \to A$,
-    men det finnes ingen avbildning $A\to \emptyset$ med mindre $A = \emptyset$.
-\end{remark}
-
-\begin{example}
-    Om vi har to avbildninger $A\xrightarrow{f} B\xrightarrow{g} C$
-    kan vi lage en ny avbildning $g\circ f\colon A\to C$
-    ved å sende $g\circ f(a) = g(f(a))$ for alle $a\in A$.
-\end{example}
-
-\begin{definition}
-    En avbildning $f\colon A\to B$ er \textit{injektiv} om for alle $a,b\in A$ med $a\neq b$
-    så er $f(a)\neq f(b)$.
-    Om $f$ er injektiv skriver vi ofte pilen som $f\colon A\hookrightarrow B$
-    og sier at $f$ er en \textit{inklusjon}.
-
-    Avbildningen er \textit{surjektiv} om for alle $b\in B$ så finnes en $a\in A$
-    slik at $f(a) = b$.
-    Om $f$ er surjektiv skriver vi noen ganger pilen som
-    $f\colon A\twoheadrightarrow B$ og sier at $f$ er en \textit{surjeksjon}.
-
-    Om $f$ er både injektiv og surjektiv sier vi den er \textit{bijektiv}
-    og sier $f$ er en \textit{bijeksjon}.
-\end{definition}
-
-\begin{lemma}\label{thm:set-inverse-function}
-    Om $f\colon A\to B$ er en bijeksjon så finnes en unik avbildning
-    $g\colon B\to A$ slik at $f\circ g = \id_B$ og $g\circ f = \id_A$,
-    dvs.
-    $f(g(b)) = b$ for alle $b\in B$ og $g(f(a)) = a$ for alle $a\in A$.
-    Vi kaller $g$ \textit{inversavbildningen} til $f$ og skriver $f^{-1} = g$.
-\end{lemma}
-\begin{proof}
-    Definer en regel $g\colon B\to A$ som for hver $b\in B$ finner en $a\in A$
-    slik at $f(a) = b$.
-    En slik $a$ finnes alltid for enhver $b$ siden $f$ er surjektiv.
-
-    La $g^\prime$ være en annen funksjon konstruert på samme måte,
-    det vil si $g^\prime$ tilfredsstiller $f(g^\prime(b)) = b$ for alle $b\in B$.
-    Men $f(g(b)) = b = f(g^\prime(b))$ og $f$ er injektiv, så $g(b) = g^\prime(b)$
-    for alle $b\in B$, så $g = g^\prime$.
-\end{proof}
-
-\begin{example}
-    For en mengde $A$ er $\id_A$ en bijeksjon,
-    og inversavbildningen er avbildningen selv $\id_A = \id_A^{-1}$.
-\end{example}
-
-\begin{example}
-    Vi kan ta \textit{snitt} og \textit{union} av mengder for å skape nye mengder.
-    Snittet av to mengder $A,B$ er mengden av elementer som ligger i både $A$ og $B$
-    \[
-        A\cap B = \{ e\mid e\in A\mbox{ og } e\in B\},
-    \]
-    mens unionen er mengden av elementer i enten $A$ eller $B$
-    \[
-        A\cup B = \{ e\mid e\in A\mbox{ eller } e\in B\}.
-    \]
-
-    Når vi tar snitt og union følger det med naturlige inklusjoner
-    \[\begin{tikzcd}
-        A\cap B
-        \rar[hook]
-        \dar[hook]
-        & B
-        \dar[hook]
-        \\
-        A
-        \rar[hook]
-        &
-        A\cup B
-    \end{tikzcd}\].
-    Disse er så naturlige at vi benevner dem som $A\cap B\subset A,B\subset A\cup B$
-    utenfor diagrammer, altså er snittet $A\cap B$
-    en \textit{delmengde} av $A$ (og $B$),
-    og $A$ (og $B$) er en delmengde av $A\cup B$.
-\end{example}
-
-\begin{example}
-    Vi har $\{1,\dots,10\}\cap \{5,\dots,15\} = \{5, 6, 7, 8, 9, 10\}$,
-    og $\{1,\dots, 10,\}\cup \{5,\dots, 15\} = \{1,\dots, 15\}$.
-\end{example}
-
-\begin{definition}
-    Vi kan ta \textit{komplementet} av to mengder $A, B$
-    \[
-        A\setminus B = \{ a\in A\mid a\notin B\} \subset A.
-    \]
-\end{definition}
-
-\begin{example}
-    Vi kan ta produktet av to mengder $A, B$.
-    Dette er mengden
-    \[
-        A\times B = \{
-            (a,b)\mid a\in A,\, b\in B
-        \}.
-    \]
-    Her følger også med noen avbildninger
-    \[\begin{tikzcd}
-        A
-        \rar[<-]{p}
-        &
-        A\times B
-        \rar{q}
-        &
-        B
-    \end{tikzcd}\]
-    hvor $p\colon (a,b)\mapsto a$ og $q\colon (a,b)\mapsto b$ er
-    projeksjonene til første og andre element henholdsvis.
-\end{example}
-
-\begin{example}
-    Produktmengden til $\{0,\dots,9\}$ med seg selv består av hunder elementer,
-    og vi har en bijeksjon $\{0,\dots,9\}\times\{0,\dots,9\}\to \{0,\dots,99\}$
-    gitt ved $(n, m)\mapsto 10n + m$.
-\end{example}
-
-\begin{definition}
-    Vi kan snakke om størrelsen på en mengde $A$ -- altså \textit{kardinaliteten}
-    til mengden, som vi benevner $|A|$ eller $\# A$.
-    Om $A$ inneholder et endelig antall elementer,
-    så er $\# A$ antall elementer i $A$.
-    Om $A$ ikke er endelig kan vi fortsatt snakke om kardinaliteten til $A$,
-    og vi kan sammenligne kardinaliteter,
-    for om det finnes en inklusjon $A\hookrightarrow B$
-    kan vi si $\# A\leq \# B$,
-    og om det finnes en bijeksjon så har vi $\# A = \# B$.
-\end{definition}
-
-\begin{example}
-    Vi har
-    \[
-        \mathbb N
-        \subset \mathbb Z
-        \subset \mathbb Q
-        \subset \mathbb R
-        \subset \mathbb C
-    \]
-    så åpenbart har vi
-    \[
-        \#\mathbb N
-        \leq \#\mathbb Z
-        \leq \#\mathbb Q
-        \leq \#\mathbb R
-        \leq \#\mathbb C,
-    \]
-    men det viser seg at
-    \[
-        \#\mathbb N
-        = \#\mathbb Z
-        = \#\mathbb Q
-        < \#\mathbb R
-        = \#\mathbb C.
-    \]
-    Merk at $\mathbb Z$ og $\mathbb R$ har forskjellig kardinalitet,
-    men begge er uendelige.
-    Vi benevner den første uendeligheten med $\aleph_0 = \#\mathbb Z$,
-    og den sistnevnte som $\aleph_1 = \#\mathbb R$.
-\end{example}
-
-\begin{example}
-    La $A, B$ være to mengder.
-    Vi kan lage mengden av alle avbildninger fra $A$ til $B$
-    \[
-        \mathrm{Map}(A,B) = \{f\colon A\to B\}.
-    \]
-    Vi sier to avbildninger $f,g\colon A\to B$
-    er like om $f(a) = g(a)$ for alle $a\in A$.
-\end{example}
-
-\subsubsection*{Oppgaver}
-
-\begin{enumerate}
-    \item Vis at om $f\colon A\hookrightarrow B$ er en injeksjon
-        så finnes en $g\colon B\twoheadrightarrow A$ slik at
-        $g\circ f = \id_A$.
-        Er den unik?
-    \item La $A\xrightarrow{f} B\xrightarrow{g} C$ være to avbildninger.
-        \begin{enumerate}
-            \item
-                Anta $g\circ f$ er surjektiv.
-                Vis at da må $f$ være surjektiv.
-            \item
-                Anta $g\circ f$ er injektiv.
-                Vis at da må $f$ være injektiv.
-            \item
-                Om $g\circ f$ er en bijeksjon, må $f$ eller $g$ være en bijeksjon?
-        \end{enumerate}
-    \item La $U$ være en mengde, og $A, B\subset U$ to delmengder.
-        Vis identiteten
-        \[
-            U\setminus(A\cap B) = (U\setminus A)\cup (U\setminus B).
-        \]
-    \item La $A, B$ være to endelige mengder, og la $n = \# A$ og $m=\# B$,
-        vis at da er $\# \mathrm{Map}(A,B) = m^n$.
-        Dette motiverer hvorfor flere forfattere velger å skrive
-        $\mathrm{Map}(A,B) = B^A$.
-    \item La $\mathrm{Bij}(A)$ benevne mengden av bijeksjoner $s\colon A\to A$,
-        og la $f\colon A\to B$ være en bijeksjon.
-        Vis at avbildningen $\tilde f\colon \mathrm{Bij}(A)\to \mathrm{Bij}(B)$
-        gitt ved $s\mapsto f\circ s\circ f^{-1}$ er en bijeksjon.
-\end{enumerate}
-Mengdeteoretisk definerer vi ofte en avbildning $A\to B$ som en samling data
-$(A, B, \Gamma)$ med $\Gamma\subset A\times B$ slik at for alle $a\in A$
-så finnes en unik $b\in B$ slik at $(a,b)\in \Gamma$.
-Denne delmengden $\Gamma$ kalles \textit{grafen} til funksjonen,
-for om vi skal gi den tilhørende ``regelen'' $f$ får vi $f(a) = b$
-for alle $(a,b)\in \Gamma$.
-
-\begin{remark}
-    Merk at for en $A\to B$ er både $A$ og $B$ del av
-    dataen, så for to avbildninger $f, g$ med definisjonsmengde
-    $A$ og samme graf $\Gamma_f = \Gamma_g$ så kan de være forskjellige
-    om de har forskjellige verdimengder $B_f, B_g$,
-    til eksempel om $B_g\subsetneq B_f$.
-\end{remark}
-\begin{example}
-    La $f\colon \mathbb Z\to \mathbb Z$ og
-    $g\colon \mathbb Z\to 2\mathbb Z$
-    hvor
-    \[
-        2\mathbb Z = \{2n \mid n\in \mathbb Z\}\subset \mathbb Z.
-    \]
-    Både $f$ og $g$ er gitt ved $f(n) = g(n) = 4n$ for alle $n\in \mathbb Z$,
-    så de har samme bilde i $\im f = \im g\subset\mathbb Z$,
-    men de har forskjellig verdimengde, så $f\neq g$.
-\end{example}
-\begin{enumerate}[resume]
-    \item
-        \begin{enumerate}
-            \item Hva betyr det for $\Gamma$ at $f$ er injektiv?
-            \item Hva betyr det for $\Gamma$ at $f$ er surjektiv?
-            \item Kan du bevise \cref{thm:set-inverse-function} på en annen
-                måte ved å bruke denne nye definisjonen av en avbildning?
-        \end{enumerate}
-\end{enumerate}
-
-\subsection{Gruppeteori}
-
 \begin{definition}
     En \textit{gruppe} $(G,\ast)$ er en mengde $G$ sammen med en avbildning
     $\ast\colon G\times G\to G$.
@@ -351,11 +11,12 @@ for alle $(a,b)\in \Gamma$.
             Dette elementet er unikt med denne egenskapen (vis dette!)
             og kalles \textit{identitetselementet} $e_G = e \in G$.
         \item for $g, h, i\in G$ har vi
-            $g\ast (h\ast i) = (g\ast h)\ast i$, og
+            $g\ast (h\ast i) = (g\ast h)\ast i$,
+            altså $\ast$ er \textit{assosiativ}, og
         \item for hver $g$ finnes et element $h\in G$
             slik at $g \ast h = e$.
             Dette elementet $h$ er unikt med denne egenskapen (vis dette!)
-            og vi benevner det $h = g^{-1}$.
+            og vi benevner det $h = g^{-1}$, \textit{inverselementet}.
     \end{itemize}
     Vi sier at $\ast$ er \textit{gruppeoperatoren} til gruppen $(G,\ast)$.
 \end{definition}
@@ -374,7 +35,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 \end{definition}
 
 \begin{definition}
-    En delmengde $H\subset G$ av en gruppe $(G, \ast)$ er en \textit{delgruppe}
+    En delmengde $H\subset G$ av en gruppe $(G, \ast)$ er en \textit{undergruppe}
     om
     \begin{itemize}
         \item $e\in H$,
@@ -385,7 +46,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 \end{definition}
 
 \begin{remark}
-    Inklusjonen av en delgruppe $H\subset G$
+    Inklusjonen av en undergruppe $H\subset G$
     \[
         H\hookrightarrow G
     \]
@@ -402,7 +63,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
         \subset \mathbb C
     \]
     hvor vi lar $\mathbb C = (\mathbb C, +)$ være en gruppe under addisjon
-    danner en kjede av delgrupper.
+    danner en kjede av undergrupper.
     Merk at $\mathbb N$ ikke er en gruppe under addisjon siden det ikke finnes
     invers elementer.
 
@@ -413,7 +74,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
         \subset \mathbb C^\times
     \]
     og utruster $\mathbb C$ med multiplikasjon isteden,
-    så danner dette en kjede med delgrupper.
+    så danner dette en kjede med undergrupper.
 \end{example}
 
 \begin{example}
@@ -442,7 +103,37 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     danner en gruppe under matrise multiplikasjon.
 \end{example}
 
-\todo{Bilde og kjerne}
+\begin{example}
+    La $f\colon G\to H$ være en morfi.
+    Husk at for en avbildning definerte vi bildet av avbildningen
+    $\im f\subset H$ som en delmengde.
+    Denne delmengden er også en undergruppe.
+\end{example}
+
+La $f\colon G\to H$ være en morfi.
+I tillegg til bildet $\im f\subset H$ kan vi lage en annen undergruppe.
+\begin{definition}
+    Vi definerer \textit{kjernen} til $f\colon G\to H$
+    som
+    \[
+        \ker f = \{ g\in G\mid f(g) = e_H\} \subset G.
+    \]
+\end{definition}
+
+\begin{lemma}
+    Kjernen $\ker (f\colon G\to H)\subset G$ av en morfi er en undergruppe av $G$.
+\end{lemma}
+\begin{proof}
+    Vi trenger å vise at $e_G\in \ker f$, at $\ker f$ er lukket under
+    gruppe-operatoren, og at det finnes inverser.
+    Den førstnevnte følger fra at $f(e_G) = e_H$ siden $f$ er en morfi.
+
+    La $g,g^\prime \in\ker f$, da har vi $f(g) = f(g^\prime) = e_H$,
+    men $f(gg^\prime) = f(g)f(g^\prime) = e_H$, så $gg^\prime\in \ker f)$.
+
+    La $g\in \ker f$, så $f(g) = e_H$, men $f(g^{-1}) = {f(g)}^{-1} = e_H$,
+    så $g^{-1}\in\ker f$.
+\end{proof}
 
 \subsubsection*{Oppgaver}
 \begin{enumerate}
@@ -455,6 +146,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
         $h\in G$ slik at $gh = e$.
     \item Vis at for en morfi $f\colon G\to H$
         så har vi for alle $g\in G$ at $f(g^{-1}) = {f(g)}^{-1}$.
+    \item Vis at for en morfi $f\colon G\to H$ så er $\im f\subset H$ en undergruppe.
 \end{enumerate}
 
 \subsection{Mer om grupper}
@@ -462,6 +154,7 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 \begin{definition}
     En gruppe $(G, \ast)$ er \textit{abelsk} om
     for alle $g,h\in G$ har vi $g\ast h = h\ast g$.
+    En operator som tilfredsstiller dette kalles \textit{kommutativ}.
 \end{definition}
 
 \begin{example}
@@ -539,13 +232,12 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
            &= g^{-1} g^\prime h^\prime {(h^\prime)}^{-1}
             = g^{-1} g^\prime
     \end{aligned}\]
-    så $g^{-1}g^\prime = h {(h^\prime)}^{-1}\in H$ siden $H$ er en delgruppe.
+    så $g^{-1}g^\prime = h {(h^\prime)}^{-1}\in H$ siden $H$ er en undergruppe.
 
     For den andre veien anta at $g^{-1} g^\prime \in H$.
     Anta for motsigelse at $gH\neq g^\prime H$,
     så ved symmetri kan vi anta (``uten tap av generalitet'')
     at det finnes et element $gh\in gH$
-    \todo{Er setminus definert?}
     slik at $gh\notin g^\prime H$.
     Men $g^{-1} g^\prime \in H$,
     så $h^\prime = {(g^{-1} g^\prime)}^{-1} h\in H$,
@@ -567,31 +259,31 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
     \]
 \end{corollary}
 \begin{proof}
-    La $\mathcal S$ være mengden delmengder $S\subset G$ slik at
+    La $\mathscr S$ være mengden delmengder $S\subset G$ slik at
     for alle $g,g^\prime \in G$ så har vi $gH\cap g^\prime = \emptyset$
     for $g\neq g^\prime$.
-    Anta $\tilde S\in \mathcal S$ er maksimal, det vil si det finnes ingen
-    $S\in \mathcal S$ slik at $\tilde S\subsetneq S$.
+    Anta $\tilde S\in \mathscr S$ er maksimal, det vil si det finnes ingen
+    $S\in \mathscr S$ slik at $\tilde S\subsetneq S$.
     Vi påstår at $\bigcup_{g\in \tilde S} gH = G$.
     Anta for motsigelse at det finnes en $g^\prime\in G$ slik at
     $g^\prime\notin \bigcup_{g\in \tilde S} gH$.
     Da har vi at $g^\prime H\cap gH = \emptyset$ for alle $g\in \tilde S$,
     for ellers har vi $g^\prime \in gH$ ved \cref{thm:coset-no-partial-intersection},
-    men da har vi at $\tilde S\cup \{g^\prime\}\in\mathcal S$
+    men da har vi at $\tilde S\cup \{g^\prime\}\in\mathscr S$
     som motsier at $\tilde S$ er maksimal,
     så det finnes ingen slik $g^\prime$ og $\bigcup_{s\in\tilde S} gH = G$.
 \end{proof}
 
 \begin{remark}
     Hvordan vet vi egentlig at det i det hele tatt finnes en maksimal
-    mengde $\tilde S$ i $\mathcal S$?
+    mengde $\tilde S$ i $\mathscr S$?
     Om gruppen er uendelig kan man tenke seg at vi alltid
     har plass til å legge til flere og flere elementer til $\tilde S$,
     på samme måte som vi alltid kan
 \end{remark}
 
 \begin{definition}
-    En delgruppe $H\subset G$ er \textit{normal}
+    En undergruppe $H\subset G$ er \textit{normal}
     dersom
     \[
         gH = Hg = \{hg\mid h\in H\}
@@ -601,96 +293,32 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 
 \begin{lemma}
     La $f\colon G\to H$ være en morfi.
-    Da er $\ker f\subset G$ en normal delgruppe.
+    Da er $\ker f\subset G$ en normal undergruppe.
 \end{lemma}
 \begin{proof}
-    \todo[inline]{Bevis dette}
-    \todo{Definer kerne og bilde av en gruppe.}
+    La $vg\in(\ker f) g$.
+    Vi ønsker å vise at $vg\in g\ker f$,
+    men det er det samme som at $g^{-1} vg\in \ker f$.
+    Vi ser at
+    \[\begin{aligned}
+        f(g^{-1}vg)
+        &= f(g^{-1})f(v)
+        \\
+        &= {(f(g))}^{-1} e_H f(g)
+        \\
+        &= e_H,
+    \end{aligned}\]
+    så $g^{-1} vg\in \ker f$.
 \end{proof}
 
 \subsubsection*{Oppgaver}
 
 \begin{enumerate}
     \item Bevis \cref{thm:coset-no-partial-intersection}
+    \item La $A$ være en abelsk gruppe og $H\subset A$ en undergruppe.
+        \begin{enumerate}
+            \item Vis at $H$ er abelsk.
+            \item Vis at $H$ er en normal undergruppe.
+        \end{enumerate}
 \end{enumerate}
 
-\subsection{Endelige abelske grupper}
-
-\begin{definition}
-    La $G$ være en gruppe.
-    En delgruppe $H\subset G$ er \textit{ekte}
-    om $H\neq \{e\}$ og $H\neq G$.
-
-    En gruppe $G$ er \textit{simpel} om $G$ ikke har noen ekte delgrupper.
-\end{definition}
-
-\begin{theorem}
-    Endelige grupper av prim orden er simple.
-    \todo{Er dette relevant?}
-\end{theorem}
-
-\begin{lemma}\label{thm:binomial-identity}
-    La $x,y\in \mathbb Z$  og $n \geq 1$ være heltall.
-    Da har vi formelen
-    \[
-        (x + y)^n = \sum_{i = 0}^n \binom n i x^i y^{n - i}.
-    \]
-\end{lemma}
-
-Av og til tar vi dette som definisjonen av \textit{binomialkoeffisientene}
-$\binom n m$,
-men om vi heller bruker definisjonen fra Pascals trekant $\binom n 0 = \binom n n = 1$
-for alle $n\in\mathbb N$ og $\binom n {m - 1} + \binom n m = \binom {n + 1} m$
-for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følger.
-\begin{proof}
-    Tilfellet $n = 1$ er enkelt siden
-    $(x + y)^1 = x + y$ og $\binom 1 0 = \binom 1 1 = 1$.
-
-    Anta $(x + y)^k = \sum_{i = 0}^k \binom k i x^i y^{k - i}$.
-    Vi har
-    \[\begin{aligned}
-        (x + y)^{k + 1}
-        &=  (x + y)(x + y)^k
-        \\
-        &= (x + y)\sum_{i = 0}^k \binom k i x^i y^{k - i}
-        \\
-        &= \sum_{i = 0}^k \binom k i x^{i + 1} y^{k - i}
-        + \sum_{i = 0}^k \binom k i x^{i} y^{k - i + 1}
-        \\
-        &= \sum_{i = 1}^{k + 1} \binom k {i - 1} x^{i} y^{(k + 1) - i}
-        + \sum_{i = 0}^k \binom k i x^{i} y^{(k + 1) - i}
-        \\
-        &= \sum_{i = 0}^{k + 1} \binom {k + 1} i x^{i} y^{(k + 1) - i}
-    \end{aligned}\]
-\end{proof}
-
-\begin{corollary}{Fermats lille teorem}
-    La $p$ være et primtall.
-    Da har vi at
-    \[
-        a^p \cong a \mod p
-    \]
-    for alle $a\in \mathbb Z$.
-\end{corollary}
-\begin{proof}
-    Vi definerer en avbildning $\pi_p\colon \mathbb Z / p\to\mathbb Z / p$
-    ved $a\mapsto a^p$.
-    La $a,b\in \mathbb Z$.
-    Vi ser at
-    \[\begin{aligned}
-        \pi_p(a + b)
-        &= (a + b)^p
-        \\
-        &= \sum_{i = 0}^p \binom p i a^i b^{p - i}
-        \\
-        &= a^p + b^p
-        \\
-        &= \pi_p(a) + \pi_p(b)
-    \end{aligned}\]
-    siden $p|\binom p i$ for $i\neq 0, p$,
-    så $\pi_p$ er en morfi.
-    Vi ser også at $\pi_p(1) = 1^p = 1$,
-    og det er bare \`en morfi $\mathbb Z / p\to \mathbb Z / p$
-    som tilfredsstiller dette, nemlig identiteten $\id_{\mathbb Z / p}$,
-    så $\pi_p = \id_{\mathbb Z / p}$.
-\end{proof}
