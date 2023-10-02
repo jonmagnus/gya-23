@@ -1,0 +1,306 @@
+
+\section{Restklasser}
+
+\begin{definition}
+    La $H\subset G$ være en undergruppe.
+    En \textit{restklasse} av $H$ i $G$ er en mengde på formen
+    \[
+        gH = \{gh\mid h\in H\}
+    \]
+    for en $g\in H$.
+    Merk at $g\in gH$ siden $e\in H$.
+\end{definition}
+
+\begin{example}
+    La $G = \mathbb Z$ være gruppen av heltall under addisjon.
+    Ta for deg undergruppen $H = 2\mathbb Z = \{ 2n\mid n\in \mathbb Z\}$
+    av partall.
+    Partallene har to restklasser i $\mathbb Z$,
+    nemlig mengden vi får når vi legger til et partall $2m$
+    \[
+        2m + (2H) = \{2m + 2n = 2(m + n)\mid n\in \mathbb Z\} = 2\mathbb Z
+    \]
+    som blir partallene selv,
+    og mengden vi får når vi legger til et oddetall
+    \[
+        (2m + 1) + (2H) = \{2m + 1 + 2n
+        = 2(m + n) + 1\mid n\in \mathbb Z\} = 1 + 2\mathbb Z
+    \]
+    som blir alle oddetallene.
+\end{example}
+
+\begin{lemma}
+    La $g, g^\prime$ være to elementer i $G$,
+    og la $H\subset G$ være en undergruppe av $G$.
+    Vi har
+    \[
+        gH = g^\prime H
+    \]
+    hvis og bare hvis $g^{-1} g^\prime\in H$.
+\end{lemma}
+\begin{proof}
+    Anta at $g H = g^\prime H$,
+    så for alle $h\in H$ finnes en $h^\prime\in H$
+    slik at $gh = g^\prime h^\prime$,
+    men da kan vi regne
+    \[\begin{aligned}
+        gh &= g^\prime h^\prime \\
+        g^{-1} gh = h
+           &= g^{-1} g^\prime h^\prime \\
+        h {(h^\prime)}^{-1}
+           &= g^{-1} g^\prime h^\prime {(h^\prime)}^{-1}
+            = g^{-1} g^\prime
+    \end{aligned}\]
+    så $g^{-1}g^\prime = h {(h^\prime)}^{-1}\in H$ siden $H$ er en undergruppe.
+
+    For den andre veien anta at $g^{-1} g^\prime \in H$.
+    Anta for motsigelse at $gH\neq g^\prime H$,
+    så ved symmetri kan vi anta (``uten tap av generalitet'')
+    at det finnes et element $gh\in gH$
+    slik at $gh\notin g^\prime H$.
+    Men $g^{-1} g^\prime \in H$,
+    så $h^\prime = {(g^{-1} g^\prime)}^{-1} h\in H$,
+    så $gh = g (g^{-1}g^\prime) h^\prime = g^\prime h^\prime \in g^\prime H$,
+    men vi antok at $gh\notin g^\prime H$, så vi har en motsigelse.
+\end{proof}
+
+\begin{corollary}\label{thm:coset-no-partial-intersection}
+    Om $gH\cap g^\prime H\neq \emptyset$ så har vi $gH = g^\prime H$.
+\end{corollary}
+
+\begin{corollary}
+    Restklassene til $H\subset G$ danner en \textit{partisjon} av $G$,
+    det vil si vi kan finne en \textbf{delmengde} (ikke en gruppe) elementer
+    $S\subset G$ slik at $gH \cap g^\prime H = \emptyset$ for alle $g,g^\prime\in S$
+    med $g\neq g^\prime$, og
+    \[
+        \bigcup_{g\in S} gH = G.
+    \]
+\end{corollary}
+\begin{proof}
+    La $\mathscr S$ være mengden delmengder $S\subset G$ slik at
+    for alle $g,g^\prime \in G$ så har vi $gH\cap g^\prime = \emptyset$
+    for $g\neq g^\prime$.
+    Anta $\tilde S\in \mathscr S$ er maksimal, det vil si det finnes ingen
+    $S\in \mathscr S$ slik at $\tilde S\subsetneq S$.
+    Vi påstår at $\bigcup_{g\in \tilde S} gH = G$.
+    Anta for motsigelse at det finnes en $g^\prime\in G$ slik at
+    $g^\prime\notin \bigcup_{g\in \tilde S} gH$.
+    Da har vi at $g^\prime H\cap gH = \emptyset$ for alle $g\in \tilde S$,
+    for ellers har vi $g^\prime \in gH$ ved \cref{thm:coset-no-partial-intersection},
+    men da har vi at $\tilde S\cup \{g^\prime\}\in\mathscr S$
+    som motsier at $\tilde S$ er maksimal,
+    så det finnes ingen slik $g^\prime$ og $\bigcup_{s\in\tilde S} gH = G$.
+\end{proof}
+
+\begin{remark}
+    Hvordan vet vi egentlig at det i det hele tatt finnes en maksimal
+    mengde $\tilde S$ i $\mathscr S$?
+    Om gruppen er uendelig kan man tenke seg at vi alltid
+    har plass til å legge til flere og flere elementer til $\tilde S$.
+    Det som redder oss er at vi vet at $\tilde S$ er ihvertfall mindre enn $G$,
+    så vi kan på en litt innviklet måte bruke et ganske abstrakt aksiom
+    kalt \textit{Zorns lemma} til å vite at det finnes et maksimalt element,
+    men vi vet ikke nødvendigvis hvordan vi skal finne et slikt element!
+\end{remark}
+
+\subsection{Kvotientgruppen}
+
+\begin{lemma}
+    La $G$ være en gruppe, $H\subset G$ en undergruppe
+    og $g\in G$ et element.
+    Da er $\# gH = \# H$.
+\end{lemma}
+\begin{proof}
+    Vi har en naturlig avbildning $f\colon H\to gH$ gitt ved $h\mapsto gh$.
+    Denne er surjektiv per definisjon av $gH$, så det gjenstår å vise at den er
+    injektiv.
+
+    Anta at $f(h) = f(h^\prime)$ for to $h, h^\prime \in H$,
+    altså at $gh = gh^\prime$, men da har vi at
+    \[
+        h
+        = g^{-1} f(h)
+        = g^{-1} f(h^\prime)
+        = h^\prime.
+    \]
+\end{proof}
+
+\begin{definition}
+    La $G$ være en gruppe og $H\subset G$ en undergruppe.
+    Vi definerer mengden av restklasser
+    \[
+        G / H = \{ gH \mid g\in G\}.
+    \]
+\end{definition}
+
+\begin{remark}
+    Merk at avbildningen $G\to G / H$ gitt ved $g\mapsto gH$ ikke er injektiv,
+    for det er flere ulike $g\neq g^\prime$ slik at $gH = g^\prime H$,
+    og dette er akkurat de parene $(g, g^\prime)$ slik at $g^{-1}g^\prime\in H$.
+\end{remark}
+
+\begin{example}
+    La $H\subset G$ være endelige grupper.
+    Vi har allerede sett at restklassene danner en partisjon av $G$,
+    og nå har vi sett at alle restklassene er like store.
+    Det følger umiddelbart at vi må ha
+    \[
+        \# G = \# (G / H) \# H,
+    \]
+    altså
+    \[
+        \# G / \# H = \# (G / H)
+    \]
+    som motiverer notasjonen.
+\end{example}
+
+Vi kan tenke oss en naturlig gruppeoperator på mengden $G / H$,
+nemlig at for to restklasser $gH$ og $g^\prime H$ definerer vi produktet deres som
+\[
+    (gH)(g^\prime H) = (gg^\prime)H,
+\]
+men husk at vi har flere elementer $\hat g\in G$ som gir samme restklasse
+$\bar gH = gH$ enda $\bar g\neq g$.
+Så for at denne operatoren skal være ``veldefinert'' på $G / H$ trenger
+vi at $(\bar gg^\prime) H = (g g^\prime)H$,
+det vil si at
+${(g g^\prime)}^{-1} (\bar g g^\prime) = {(g^\prime)}^{-1} h g^\prime\in H$
+hvor $h = g^{-1} g\in H$,
+men dette er ikke automatisk!
+
+\begin{example}
+    Ta for deg gruppen av permutasjoner $G = S_3$ av mengden på tre elementer $\{1,2,3\}$,
+    og la $H$ være undergruppen bestående av identiteten og permutasjonen
+    \[
+        (12)\colon \begin{cases}
+            1\mapsto 2\\
+            2\mapsto 1\\
+            3\mapsto 3.
+        \end{cases}
+    \]
+    La $g= (13)$ og $g^\prime (23)$.
+    Vi ser at $gH = \{(13)e, (13)(12)\} = \{(13), (123)\}$,
+    så $\bar gH = gH$ hvor $\bar g = (123)$,
+    men $gg^\prime = (13)(23) = (321)$,
+    mens $\bar g g^\prime = (123)(23) = (12)$,
+    så
+    \[
+        (gg^\prime)H = (321)H\neq H = (12)H = (\bar g g^\prime)H.
+    \]
+\end{example}
+
+\begin{definition}
+    En undergruppe $H\subset G$ er \textit{normal}
+    dersom
+    \[
+        gH = Hg = \{hg\mid h\in H\}
+    \]
+    for alle $g\in G$.
+\end{definition}
+
+\begin{lemma}
+    Om $H\subset G$ er en normal undergruppe så er ``multiplikasjon''
+    veldefinert på mengden av restklasser $G / H$,
+    så $G / H$ danner en gruppe -- \textit{kvotientgruppen} av $G$ over $H$.
+\end{lemma}
+\begin{proof}
+    Om vi har $gH = Hg$ for alle $g\in H$ så følger det at
+    $H = g^{-1} H g$,
+    så $g^{-1}h g\in H$ for alle $h\in H$.
+\end{proof}
+
+\begin{lemma}
+    La $f\colon G\to H$ være en morfi.
+    Da er $\ker f\subset G$ en normal undergruppe.
+\end{lemma}
+\begin{proof}
+    La $vg\in(\ker f) g$.
+    Vi ønsker å vise at $vg\in g\ker f$,
+    men det er det samme som at $g^{-1} vg\in \ker f$.
+    Vi ser at
+    \[\begin{aligned}
+        f(g^{-1}vg)
+        &= f(g^{-1})f(v)
+        \\
+        &= {(f(g))}^{-1} e_H f(g)
+        \\
+        &= e_H,
+    \end{aligned}\]
+    så $g^{-1} vg\in \ker f$.
+\end{proof}
+
+\begin{theorem}
+    La $f\colon G\to H$ være en surjektiv morfi.
+    Da har vi en isomorfi $\hat f\colon G / \ker f \to H$,
+    det vil si vi kan fylle inn følgende avbildning
+    \[\begin{tikzcd}
+        G
+        \rar
+        \drar[swap]{f}
+        &
+        G / \ker f
+        \dar[dashed]{\bar f}
+        \\
+        &
+        H.
+    \end{tikzcd}\]
+\end{theorem}
+\begin{proof}
+    Vi benevner restklassen $g + \ker f$ i $G / \ker f$
+    ved $\bar g$.
+    Vi konstruerer en avbildning $\bar f\colon G / \ker f\to H$
+    ved at for en $\bar g\in G / \ker f$ setter vi
+    $\bar f(\bar g) = f(g)$ for en representant $g$.
+
+    Om vi velger en annen representant $g^\prime$ med
+    $\bar g^\prime = \bar g$ har vi at $g^{-1}g^\prime\in\ker f$,
+    så $f(g) = f(g)f(g^{-1}g^\prime) = f(gg^{-1})f(g^\prime) = f(g^\prime)$,
+    så definisjonen av $\bar f$ er uavhengig av hvordan vi velger representanter.
+
+    For alle $h\in H$ så finnes en $g\in G$ slik at $f(g) = h$,
+    så $\bar f(\bar g) = h$, og $\bar f$ er surjektiv.
+
+    \todo[inline]{Vis injektivitet og at det er en morfi}
+\end{proof}
+
+\subsubsection*{Oppgaver}
+
+\begin{enumerate}
+    \item
+        \begin{enumerate}
+            \item Hvilke restklasser har $3\mathbb Z = \{3n \mid n\in \mathbb Z\}$
+                i $\mathbb Z$? Hva med $5\mathbb Z\subset \mathbb Z$?
+            \item For et generelt heltall $n\in \mathbb Z$,
+                vis at $n\mathbb Z\subset \mathbb Z$ har $n$ restklasser,
+                det vil si $\#(\mathbb Z / n\mathbb Z = n$.
+        \end{enumerate}
+    \item Bevis \cref{thm:coset-no-partial-intersection}
+    \item Vi skal undersøke mengden av restklasser til $\mathbb Z\subset \mathbb R$.
+        \begin{enumerate}
+            \item Vi har sett at to restklasser $a + \mathbb Z = b + \mathbb Z$
+                hvis og bare hvis $(a - b)\in \mathbb Z$.
+                Bruk dette til å konstruere en bijeksjon
+                $[0,1)\to \mathbb R / \mathbb Z$.
+            \item Vi har at $a + \mathbb Z = \mathbb Z + a$,
+                så $\mathbb Z\subset \mathbb R$ er en normal undergruppe
+                og $\mathbb R / \mathbb Z$ danner en gruppe.
+                Vis at avbildningen
+                \[
+                    \mathrm{exp}\colon \begin{cases}
+                        (\mathbb R, +)\mapsto (S^1,\times)\\
+                        x\mapsto e^{2\pi i x}
+                    \end{cases}
+                \]
+                er en gruppe-morfi (merk at vi går fra addisjon til multiplikasjon)
+                og at den danner en bijeksjon $[0,1)\to S^1$.
+                Her er $S^1$ enhetsirkelen
+                \[
+                    S^1 = \{z\mid |z| = 1\}\subset \mathbb C.
+                \]
+                Dette viser at vi har en isomorfi $\mathbb R / \mathbb Z \to S^1$.
+            \item Kan du forestille deg hva som skjer om vi tar
+                $\mathbb R / \mathbb Q$?
+        \end{enumerate}
+\end{enumerate}
+

@@ -1,6 +1,129 @@
 \section{Endelige abelske grupper}
 
 \begin{definition}
+    En gruppe $(G, \ast)$ er \textit{abelsk} om
+    for alle $g,h\in G$ har vi $g\ast h = h\ast g$.
+    En operator som tilfredsstiller dette kalles \textit{kommutativ}.
+\end{definition}
+
+\begin{example}
+    Alle eksemplene er med addisjon som gruppeoperator ovenfor er abelske.
+    Generelt, om vi benevner en operator med symbolet ``$+$'' så er operatoren
+    kommutativ.
+\end{example}
+
+\begin{example}
+    Gruppen av invertible $(2\times 2)$-matriser under multiplikasjon
+    $\mathrm{GL}_2(\mathbb R)$
+    er ikke abelsk, siden til eksempel
+    \[
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 1\\
+            1 & 2
+        \end{bmatrix}
+    \]
+    mens
+    \[
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            2 & 1\\
+            1 & 1
+        \end{bmatrix}.
+    \]
+\end{example}
+
+\begin{definition}
+    La $g_1,\dots, g_n\subset G$ være et endelig antall elementer i $G$.
+    Vi definerer \textit{gruppen generert av $g_1,\dots, g_n$}
+    \[
+        H = \langle g_1,\dots,g_n\rangle \subset G
+    \]
+    som den minste undergruppen av $G$ som inneholder alle elementene $g_1,\dots,g_n$.
+
+    Om det finnes en $g\in G$ slik at $G = \langle g\rangle$ sier vi at $G$
+    er en \textit{syklisk} gruppe.
+\end{definition}
+
+\begin{remark}\label{rmk:cyclic-structure}
+    \todo{This remark is not necessary}
+    Merk at for en syklisk undergruppe $\langle g\rangle\subset G$
+    må vi ihvertfall ha $e = g^0, g^{-1}\in \langle g\rangle$,
+    og $gg = g^2\in \langle g\rangle$,
+    så ved induksjon følger det at $g^n\in \langle g\rangle$
+    for alle $n\in \mathbb Z$.
+\end{remark}
+
+\begin{example}
+    Heltallene $\mathbb Z$ er en syklisk gruppe generert av $1$.
+    Alle undergruppene $n\mathbb Z\subset \mathbb Z$ er også sykliske generert av
+    $n$.
+\end{example}
+
+\begin{lemma}
+    La $G$ være en gruppe.
+    Da er $G$ syklisk hvis og bare hvis det finnes en surjektiv morfi
+    $\mathbb Z\to G$.
+\end{lemma}
+\begin{proof}
+    Anta det finnes en surjektiv avbildning $f\colon \mathbb Z\to G$.
+    Da har vi at for alle $g\in G$ så finnes en $n\in \mathbb Z$ slik at
+    $f(n) = f(1)^n = g$, så $G = \langle f(1)\rangle$.
+
+    Anta at $G = \langle g \rangle$ for en $g\in G$.
+    Vi konstruerer en avbildning $f\colon \mathbb Z\to G$
+    gitt ved $n\mapsto g^n$.
+    Åpenbart har vi at $\im f\subset G$,
+    men $\im f$ er en undergruppe av $G$ og $g\in \im f$,
+    så $\langle g\rangle\subset \im f$ siden $\langle g\rangle$
+    er den minste undergruppen som inneholder $g$.
+    Men $\langle g\rangle = G$,
+    så dermed har vi at $\langle g \rangle = \im f = G$,
+    så $f$ er surjektiv.
+\end{proof}
+
+\begin{corollary}
+    Undergruppene $k\mathbb Z = \langle k\rangle \subset \mathbb Z$
+    er de eneste undergruppene $\mathbb Z$ har.
+\end{corollary}
+\begin{proof}
+    La $k_1, \dots, k_n$ være en endelig samling elementer i $\mathbb Z$.
+    Da finnes det heltall $c_1,\dots,c_n$ slik at $c_1 k_1 + \dots + c_n k_n = k$
+    hvor $k = \mathrm{gcd}(k_1,\dots,k_n)$
+    er største felles nevner for $k_1,\dots, k_n$.
+    Dette følger fra Euclids algoritme.
+    Da vil $\langle k_1,\dots, k_n\rangle = \langle k\rangle$.
+
+    Et tilsvarende argument holder for uendelige samlinger $\{k_i\}$
+    ved å velge en endelig delmengde.
+\end{proof}
+
+\begin{corollary}
+    La $G$ være en syklisk gruppe.
+    Da finnes en isomorfi $\mathbb Z / n\mathbb Z\to G$
+    hvor $n = \# G$.
+\end{corollary}
+\begin{proof}
+    \todo[inline]{Bevis dette}
+\end{proof}
+
+\begin{definition}
     La $G$ være en gruppe.
     En undergruppe $H\subset G$ er \textit{ekte}
     om $H\neq \{e\}$ og $H\neq G$.
@@ -78,3 +201,12 @@ for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følg
     som tilfredsstiller dette, nemlig identiteten $\id_{\mathbb Z / p}$,
     så $\pi_p = \id_{\mathbb Z / p}$.
 \end{proof}
+
+\subsubsection*{Oppgaver}
+\begin{enumerate}
+    \item La $A$ være en abelsk gruppe og $H\subset A$ en undergruppe.
+        \begin{enumerate}
+            \item Vis at $H$ er abelsk.
+            \item Vis at $H$ er en normal undergruppe.
+        \end{enumerate}
+\end{enumerate}

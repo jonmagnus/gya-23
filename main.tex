@@ -1,4 +1,4 @@
-\documentclass[norks, final]{article}
+\documentclass[norks, draft]{article}
 
 \usepackage{notes}
 
@@ -10,7 +10,8 @@
 \includeonly{%
     sections/set-theory,
     sections/group-theory,
-    %sections/finite-abelian-groups,
+    sections/cosets,
+    sections/finite-abelian-groups,
 }
 
 \begin{document}
@@ -21,11 +22,13 @@
 \listoftodos
 
 %\include{sections/introduction}
+
 \include{sections/set-theory}
 \include{sections/group-theory}
+\include{sections/cosets}
 \include{sections/finite-abelian-groups}
 
-\todo[inline]{
+
 \begin{verbatim}
 - Set theory
     - Difference between sets and tuples
@@ -59,7 +62,7 @@
     - The kernel is normal
     - Chinese remainder theorem/Clasification of finite abelian groups
 \end{verbatim}
-}
+
 
 \printbibliography
 
