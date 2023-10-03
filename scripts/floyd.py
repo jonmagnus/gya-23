@@ -15,13 +15,12 @@ def floyd(a, p):
     return i
 
 
-n = 100
-N = 1000
-epochs = np.zeros([N, n])
-for i in range(N):
-    p = np.random.randint(0, n, n)
-    for a in range(n):
-        epochs[i, a] = floyd(a, p)
-print("Mean: ", np.mean(epochs))
-
-# TODO: Make some graphics.
+if __name__ == "__main__":
+    n = 100
+    N = 1000
+    epochs = np.zeros([N, n])
+    for i in range(N):
+        p = np.random.randint(0, n, n)
+        for a in range(n):
+            epochs[i, a] = floyd(a, p)
+    print("Mean: ", np.mean(epochs))
