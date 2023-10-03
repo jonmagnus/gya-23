@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from miller_rabin import miller_rabin, fast_exp_mod
+
+
+def floyd(a, p):
+    """
+    Compute the epoch of a under p.
+    """
+    t = p[a]
+    h = p[p[a]]
+    i = 1
+    while t != h:
+        i += 1
+        t = p[t]
+        h = p[p[h]]
+    return i
+
+
+n = 25
+N = 1000
+epochs = np.zeros([N, n])
+for i in range(N):
+    p = np.random.randint(0, n, n)
+    for a in range(n):
+        epochs[i, a] = floyd(a, p)
+print("Mean: ", np.mean(epochs))
+
+
+def test_fast_exp_mod():
+    m = random.randrange(1 << 100, 1 << 101)
+    a = random.randrange(2, m - 2)
+    b = random.randrange(2, 100)
+    assert fast_exp_mod(a, b, m) == (a ** b) % m
+
+prime = 2 ** 255 - 19
+print(prime)
+print(miller_rabin(prime, 10))
