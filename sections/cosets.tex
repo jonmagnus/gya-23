@@ -230,7 +230,7 @@ men dette er ikke automatisk!
     så $g^{-1} vg\in \ker f$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}[Isomorfiteoremet]\label{thm:isomorphism-theorem}
     La $f\colon G\to H$ være en surjektiv morfi.
     Da har vi en isomorfi $\hat f\colon G / \ker f \to H$,
     det vil si vi kan fylle inn følgende avbildning
@@ -261,7 +261,18 @@ men dette er ikke automatisk!
     For alle $h\in H$ så finnes en $g\in G$ slik at $f(g) = h$,
     så $\bar f(\bar g) = h$, og $\bar f$ er surjektiv.
 
-    \todo[inline]{Vis injektivitet og at det er en morfi}
+    La $g, g^\prime$ slik at $f(g) = f(g^\prime)$.
+    Da er $f(g^{-1}g^\prime) = f(g)^{-1} f(g^\prime) = e$,
+    så $g^{-1}g^\prime\in \ker f$, så $\bar g = \bar g^\prime$.
+
+    Det gjenstår å vise at $\bar f$ er en morfi,
+    det vil si at for alle $\bar g, \bar g^\prime \in G / \ker f$
+    så er $\bar f(\bar g\bar g^\prime) = \bar f(\bar g)\bar f(\bar g^\prime)$.
+    Vi har at $\bar g\bar g^\prime = \overline{(gg^\prime)}$,
+    og vi vet allerede at dette er veldefinert siden $\ker f$ er normal,
+    så det gjenstår bare å sjekke at $f(g)f(g^\prime) = f(gg^\prime)$
+    for et vilkårlig valg av representanter $g, g^\prime$,
+    men dette følger av at $f$ er en morfi.
 \end{proof}
 
 \subsubsection*{Oppgaver}

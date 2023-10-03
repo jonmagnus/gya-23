@@ -1,0 +1,314 @@
+\section{Sykliske grupper}
+
+\begin{definition}
+    En gruppe $(G, \ast)$ er \textit{abelsk} om
+    for alle $g,h\in G$ har vi $g\ast h = h\ast g$.
+    En operator som tilfredsstiller dette kalles \textit{kommutativ}.
+\end{definition}
+
+\begin{example}
+    Alle eksemplene er med addisjon som gruppeoperator ovenfor er abelske.
+    Generelt, om vi benevner en operator med symbolet ``$+$'' så er operatoren
+    kommutativ.
+\end{example}
+
+\begin{example}
+    Gruppen av invertible $(2\times 2)$-matriser under multiplikasjon
+    $\mathrm{GL}_2(\mathbb R)$
+    er ikke abelsk, siden til eksempel
+    \[
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 1\\
+            1 & 2
+        \end{bmatrix}
+    \]
+    mens
+    \[
+        \begin{bmatrix}
+            1 & 0\\
+            1 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 1\\
+            0 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            2 & 1\\
+            1 & 1
+        \end{bmatrix}.
+    \]
+\end{example}
+
+\begin{definition}
+    La $g_1,\dots, g_n\subset G$ være et endelig antall elementer i $G$.
+    Vi definerer \textit{gruppen generert av $g_1,\dots, g_n$}
+    \[
+        H = \langle g_1,\dots,g_n\rangle \subset G
+    \]
+    som den minste undergruppen av $G$ som inneholder alle elementene $g_1,\dots,g_n$.
+
+    Om det finnes en $g\in G$ slik at $G = \langle g\rangle$ sier vi at $G$
+    er en \textit{syklisk} gruppe.
+\end{definition}
+
+\begin{remark}\label{rmk:cyclic-structure}
+    \todo{This remark is not necessary}
+    Merk at for en syklisk undergruppe $\langle g\rangle\subset G$
+    må vi ihvertfall ha $e = g^0, g^{-1}\in \langle g\rangle$,
+    og $gg = g^2\in \langle g\rangle$,
+    så ved induksjon følger det at $g^n\in \langle g\rangle$
+    for alle $n\in \mathbb Z$.
+\end{remark}
+
+\begin{example}
+    Heltallene $\mathbb Z$ er en syklisk gruppe generert av $1$.
+    Alle undergruppene $n\mathbb Z\subset \mathbb Z$ er også sykliske generert av
+    $n$.
+\end{example}
+
+\begin{lemma}\label{thm:cyclic-surjection}
+    La $G$ være en gruppe.
+    Da er $G$ syklisk hvis og bare hvis det finnes en surjektiv morfi
+    $\mathbb Z\to G$.
+\end{lemma}
+\begin{proof}
+    Anta det finnes en surjektiv avbildning $f\colon \mathbb Z\to G$.
+    Da har vi at for alle $g\in G$ så finnes en $n\in \mathbb Z$ slik at
+    $f(n) = f(1)^n = g$, så $G = \langle f(1)\rangle$.
+
+    Anta at $G = \langle g \rangle$ for en $g\in G$.
+    Vi konstruerer en avbildning $f\colon \mathbb Z\to G$
+    gitt ved $n\mapsto g^n$.
+    Åpenbart har vi at $\im f\subset G$,
+    men $\im f$ er en undergruppe av $G$ og $g\in \im f$,
+    så $\langle g\rangle\subset \im f$ siden $\langle g\rangle$
+    er den minste undergruppen som inneholder $g$.
+    Men $\langle g\rangle = G$,
+    så dermed har vi at $\langle g \rangle = \im f = G$,
+    så $f$ er surjektiv.
+\end{proof}
+
+\begin{corollary}\label{thm:integer-subgroups}
+    Undergruppene $k\mathbb Z = \langle k\rangle \subset \mathbb Z$
+    er de eneste undergruppene $\mathbb Z$ har.
+\end{corollary}
+\begin{proof}
+    La $k_1, \dots, k_n$ være en endelig samling elementer i $\mathbb Z$.
+    Da finnes det heltall $c_1,\dots,c_n$ slik at $c_1 k_1 + \dots + c_n k_n = k$
+    hvor $k = \mathrm{gcd}(k_1,\dots,k_n)$
+    er største felles nevner for $k_1,\dots, k_n$.
+    Dette følger fra Euclids algoritme.
+    Da vil $\langle k_1,\dots, k_n\rangle = \langle k\rangle$.
+
+    Et tilsvarende argument holder for uendelige samlinger $\{k_i\}$
+    ved å velge en endelig delmengde.
+\end{proof}
+
+\begin{corollary}
+    La $G$ være en syklisk gruppe.
+    Da finnes en isomorfi $\mathbb Z / n\mathbb Z\to G$
+    hvor $n = \# G$.
+\end{corollary}
+\begin{proof}
+    Siden $G$ er syklisk finnes en surjektiv morfi $f\colon \mathbb Z\to G$
+    ved \cref{thm:cyclic-surjection}.
+    Vi har at $\ker f\subset \mathbb Z$ er en undergruppe,
+    så det finnes en $n\in \mathbb Z$ slik at
+    $\ker f = n\mathbb Z$ ved \cref{thm:integer-subgroups},
+    så $\bar f\colon \mathbb Z / \ker f = \mathbb Z / n\mathbb Z\to G$
+    er en isomorfi.
+    Merk at en isomorfi er en bijeksjon, så $\# G = \# \mathbb Z / n\mathbb Z = n$.
+\end{proof}
+
+\begin{theorem}[Kinesisk restteorem]
+    La $n\in \mathbb Z$ og la $k_1,\dots, k_r\in \mathbb Z$ være en rekke heltall.
+    Vi har naturlige morfier $f_i\colon \mathbb Z\to \mathbb Z / k_i\mathbb Z$
+    for alle $i=1,\dots,r$.
+    La $n_i$ være restklassen til $n$ i $\mathbb Z / k_i\mathbb Z$.
+    Da har vi at $f_i(n^\prime) = n_i$ for alle $i=1,\dots,r$
+    hvis og bare hvis $n - n^\prime\in k\mathbb Z$ hvor
+    \[
+        k
+        = \mathrm{lcm}(k_1,\dots,k_r)
+        = \frac {k_1\dots k_n}{\mathrm{gcd}(k_1,\dots,k_n)}.
+    \]
+\end{theorem}
+\begin{proof}
+    Siden
+    $\mathrm{lcm}(k_1,\dots,k_r)
+    = \mathrm{lcm}(k_1, \mathrm{lcm}(k_2,\dots,k_r))$
+    viser vi resultatet ved induksjon på $r$.
+
+    Om $r = 1$ er $\mathrm{lcm}(k_1) = k_1 = k$,
+    så resultatet er umiddelbart.
+
+    Før vi går videre observerer vi at vi kan omformulere teoremet
+    ved hjelp av diagrammet
+    \todo{Introduser notasjonen $\mathbb Z / n\mathbb Z = \mathbb Z / n$}
+    \[\begin{tikzcd}
+        \mathbb Z
+        \rar
+        \drar[swap]{f_1\times \dots\times f_r}
+        &
+        \mathbb Z / \mathrm{lcm}(k_1,\dots,k_r)
+        \dar{\bar f_1\times\dots\times\bar f_r}
+        \\
+        &
+        (\mathbb Z / k_1)\times \dots\times(\mathbb Z / k_r).
+    \end{tikzcd}\]
+    Teoremet sier at om vi har et element
+    $(n_1,\dots,n_r)\in (\mathbb Z / k_1)\times\dots\times(\mathbb Z / k_r)$
+    i bildet av $f_1\times\dots\times f_r)$
+    så finnes en unik restklasse $n + (k\mathbb Z)$ slik at
+    \[
+        (\bar f_1\times\dots\times \bar f_r)(n + (k\mathbb Z)) = (n_1,\dots, n_r),
+    \]
+    altså har vi en isomorfi
+    \[
+        \mathbb Z / k\xrightarrow{\sim} \im (f_1\times\dots\times f_2).
+    \]
+    Tanken er at vi filtrerer dette bildet
+    \[\begin{tikzcd}
+        \mathbb Z
+        \ar[bend right]{ddddr}
+        \rar
+        &
+        \mathbb Z / \mathrm{lcm}(k_1,\dots,k_r)
+        \dar
+        \\
+        &
+        (\mathbb Z / k_1) \times (\mathbb Z / \mathrm{lcm}(k_2,\dots, k_r))
+        \dar
+        \\
+        &
+        (\mathbb Z / k_1)
+        \times (\mathbb Z / k_2)
+        \times (\mathbb Z / \mathrm{lcm}(k_3,\dots, k_r))
+        \dar
+        \\
+        &
+        \dots
+        \dar
+        \\
+        &
+        (\mathbb Z / k_1)
+        \times\dots\times (\mathbb Z / k_r).
+    \end{tikzcd}\]
+
+    Anta at $f_i(n^\prime) = n_i$ for alle $i=2,\dots, r$ hvis og bare
+    hvis $n^\prime - n\in k^\prime \mathbb Z$ hvor
+    $k^\prime = \mathrm{lcm}(k_2,\dots,k_r)$.
+    Anta også at $f_1(n^\prime) = n_1$.
+    Da har vi at
+    \[
+        n = n_1 + k_1 m_1 = n^\prime + k^\prime m_2
+    \]
+    og $n^\prime = n_1 + k_1 m_1^\prime$,
+    så
+    \[
+        n - n^\prime = k_1 (m_1 - m_1^\prime) = k^\prime m_2.
+    \]
+    Merk at $k_1 | n - n^\prime$,
+    og $k^\prime | n - n^\prime$,
+    så $\mathrm{lcm}(k_1, k^\prime) = k | n - n^\prime$,
+    så $n - n^\prime \in k\mathbb Z$.
+\end{proof}
+
+\subsubsection*{Oppgaver}
+\begin{enumerate}
+    \item La $A$ være en abelsk gruppe og $H\subset A$ en undergruppe.
+        \begin{enumerate}
+            \item Vis at $H$ er abelsk.
+            \item Vis at $H$ er en normal undergruppe.
+        \end{enumerate}
+\end{enumerate}
+Ta for deg en endelig syklisk gruppe $\mathbb Z / n\mathbb Z$.
+Multiplikasjon gir oss en avbildning
+$\mu\colon \mathbb Z\times \mathbb Z\to \mathbb Z$
+gitt ved $(a,b)\mapsto ab$.
+\todo{Definer produktet av to grupper}
+Om vi tar $a^\prime, b^\prime$ slik at
+$a^\prime - a, b^\prime - b\in n\mathbb Z$,
+det vil si at det finnes $k, l\in \mathbb Z$ slik at
+$a^\prime = a + kn$ og $b^\prime = b + lb$,
+så har vi at
+\[\begin{aligned}
+    \mu(a^\prime, b^\prime)
+    &= \mu(a + kn, b + ln)
+    \\
+    &= (a + kn)(b + ln)
+    \\
+    &= ab + (al + bk + kln)n
+    \\
+    &= \mu(a, b) + (al + bk + kln)n,
+\end{aligned}\]
+så $\mu(a^\prime, b^\prime) - \mu(a, b) \in \mathbb Z$.
+Det følger at vi kan lage en morfi $\hat\mu$ som passer i diagrammet
+\[\begin{tikzcd}
+    \mathbb Z\times \mathbb Z
+    \rar{\mu}
+    \dar
+    &
+    \mathbb Z
+    \dar
+    \\
+    (\mathbb Z / n\mathbb Z)\times(\mathbb Z / n\mathbb Z)
+    \rar{\hat\mu}
+    &
+    \mathbb Z,
+\end{tikzcd}\]
+altså kan vi definere multiplikasjon på $\mathbb Z / n\mathbb Z$ også.
+\begin{enumerate}[resume]
+    \item Vis at om $\mathrm{gcd}(a, n) = d$ så finnes det en
+        $b$ slik at $\bar\mu(a, b) = d\in \mathbb Z / n\mathbb Z$.
+        Spesielt om $n = p$ er et primtall så finnes det for alle
+        \[
+            a \in (\mathbb Z / p\mathbb Z)\setminus\{0\}
+            = {(\mathbb Z / n\mathbb Z)}^\times
+        \]
+        et element $b\neq 0$ slik at $\overline\mu(a, b) = 1$,
+        det vil si at multiplikasjon $\bar\mu$ på
+        ${(\mathbb Z / p\mathbb Z)}^\times$ har inverselementer,
+        så $({(\mathbb Z / p\mathbb Z)}^\times, \bar\mu)$ danner en gruppe.
+    \item Vi benevner $\bar\mu$ ovenfor som $\times$ og skriver
+        $\bar\mu(a,b)$ bare som $ab$.
+        Vis at $({(\mathbb Z / p\mathbb Z)}^\times, \times)$ er syklisk,
+        så
+        \[
+            ({(\mathbb Z / p\mathbb Z)}^\times, \times)
+            \cong (\mathbb Z / (p - 1)\mathbb Z, +).
+        \]
+\end{enumerate}
+\begin{remark}
+    Denne isomorfien er viktig for flere kryptografiske algoritmer,
+    slik som Diffie-Hellman,
+    for selv om det ser ut som vi jobber over gruppen $\mathbb Z / p\mathbb Z$,
+    så jobber vi over den multiplikativt.
+    Det handler i prinsipp om at vi jobber over ${(\mathbb Z / p\mathbb Z)}^\times$
+    slik at vi har en komplisert måte å jobbe med $\mathbb Z / (p - 1)\mathbb Z$.
+\end{remark}
+
+Selv om $n$ ikke er et primtall kan vi definere en gruppe under multiplikasjon
+som en del av $\mathbb Z / n\mathbb Z$.
+La
+\[
+    {(\mathbb Z / n\mathbb Z)}^\times
+    = \{ a\mid \mathrm{gcd}(a, n) = 1\}.
+\]
+Merk at denne definisjonen sammenfaller med vår
+tidligere definisjon når $n$ er et primtall.
+\begin{enumerate}[resume]
+    \item La $n = p_1\dots p_r$ være en faktorisering av $n$
+        slik at $p_i$ er primtall for alle $i=1,\dots,r$.
+        Vis at $\# {(\mathbb Z / n\mathbb Z)}^\times = (p_1 - 1)\dots(p_r - 1)$.
+\end{enumerate}
