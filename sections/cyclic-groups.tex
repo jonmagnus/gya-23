@@ -61,15 +61,6 @@
     er en \textit{syklisk} gruppe.
 \end{definition}
 
-\begin{remark}\label{rmk:cyclic-structure}
-    \todo{This remark is not necessary}
-    Merk at for en syklisk undergruppe $\langle g\rangle\subset G$
-    må vi ihvertfall ha $e = g^0, g^{-1}\in \langle g\rangle$,
-    og $gg = g^2\in \langle g\rangle$,
-    så ved induksjon følger det at $g^n\in \langle g\rangle$
-    for alle $n\in \mathbb Z$.
-\end{remark}
-
 \begin{example}
     Heltallene $\mathbb Z$ er en syklisk gruppe generert av $1$.
     Alle undergruppene $n\mathbb Z\subset \mathbb Z$ er også sykliske generert av
@@ -130,11 +121,25 @@
     Merk at en isomorfi er en bijeksjon, så $\# G = \# \mathbb Z / n\mathbb Z = n$.
 \end{proof}
 
+\begin{remark}
+    De endelige gruppen $\mathbb Z / n\mathbb Z$ er en slags ``modell''
+    for alle sykliske grupper av $n$ elementer,
+    så vi kommer til å bruke den mye og skriver ofte bare
+    \[
+        \mathbb Z / n = \mathbb Z / n\mathbb Z.
+    \]
+\end{remark}
+
+\begin{example}
+    Enhetrøttene $\mu_n$ er en syklisk gruppe,
+    så vi har en isomorfi $\mathbb Z / n \to \mu_n$.
+\end{example}
+
 \begin{theorem}[Kinesisk restteorem]
     La $n\in \mathbb Z$ og la $k_1,\dots, k_r\in \mathbb Z$ være en rekke heltall.
-    Vi har naturlige morfier $f_i\colon \mathbb Z\to \mathbb Z / k_i\mathbb Z$
+    Vi har naturlige morfier $f_i\colon \mathbb Z\to \mathbb Z / k_i$
     for alle $i=1,\dots,r$.
-    La $n_i$ være restklassen til $n$ i $\mathbb Z / k_i\mathbb Z$.
+    La $n_i$ være restklassen til $n$ i $\mathbb Z / k_i$.
     Da har vi at $f_i(n^\prime) = n_i$ for alle $i=1,\dots,r$
     hvis og bare hvis $n - n^\prime\in k\mathbb Z$ hvor
     \[
@@ -154,7 +159,6 @@
 
     Før vi går videre observerer vi at vi kan omformulere teoremet
     ved hjelp av diagrammet
-    \todo{Introduser notasjonen $\mathbb Z / n\mathbb Z = \mathbb Z / n$}
     \[\begin{tikzcd}
         \mathbb Z
         \rar
@@ -236,7 +240,6 @@ Ta for deg en endelig syklisk gruppe $\mathbb Z / n\mathbb Z$.
 Multiplikasjon gir oss en avbildning
 $\mu\colon \mathbb Z\times \mathbb Z\to \mathbb Z$
 gitt ved $(a,b)\mapsto ab$.
-\todo{Definer produktet av to grupper}
 Om vi tar $a^\prime, b^\prime$ slik at
 $a^\prime - a, b^\prime - b\in n\mathbb Z$,
 det vil si at det finnes $k, l\in \mathbb Z$ slik at

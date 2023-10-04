@@ -135,6 +135,43 @@ I tillegg til bildet $\im f\subset H$ kan vi lage en annen undergruppe.
     så $g^{-1}\in\ker f$.
 \end{proof}
 
+\begin{definition}
+    La $(G, \ast_G), (H, \ast_H)$ være to grupper.
+    Vi kan definere en operator $\ast_{G\times H}$
+    på $G\times H$ ved
+    \[
+        (g, h)\ast_{G\times H} (g^\prime, h^\prime)
+        = (g \ast_G g^\prime, h \ast_H h^\prime).
+    \]
+    Dette gjør $G\times H$ til en gruppe med identitetselement $(e_G, e_H)$.
+\end{definition}
+
+Som med mengder har vi fortsatt de to projeksjonene
+\[\begin{tikzcd}
+    G
+    \rar[<-]{p}
+    &
+    G\times H
+    \rar{q}
+    &
+    H,
+\end{tikzcd}\]
+men vi har også inklusjoner den andre veien
+\[\begin{tikzcd}
+    G
+    \rar{\id_G\times e_H}
+    &
+    G\times H
+    \rar[<-]{e_G\times \id_H}
+    &
+    H,
+\end{tikzcd}\]
+gitt ved $(\id_G\times e_H)\colon g\mapsto (g, e_H)$
+og $(e_G\times \id_H)\colon h\mapsto (e_G, h)$.
+Disse tilfredsstiller $p\circ (\id_G\times e_H) = \id_G$
+og $q\circ (e_G\times \id_H) = \id_H$.
+Merk også at $\im (\id_G\times e_H) = \ker q$.
+
 \subsubsection*{Oppgaver}
 \begin{enumerate}
     \item Finn enhetselementet og inverselementene til alle eksemplene på
@@ -147,5 +184,77 @@ I tillegg til bildet $\im f\subset H$ kan vi lage en annen undergruppe.
     \item Vis at for en morfi $f\colon G\to H$
         så har vi for alle $g\in G$ at $f(g^{-1}) = {f(g)}^{-1}$.
     \item Vis at for en morfi $f\colon G\to H$ så er $\im f\subset H$ en undergruppe.
+\end{enumerate}
+Så langt har vi sett mange eksempler på uendelige grupper,
+slik som $\mathbb C$ og dens undergrupper.
+Vi ønsker å se på flere eksempler av \textit{endelige} grupper,
+det vil si grupper hvor den underliggende mengden er endelig.
+\begin{enumerate}[resume]
+    \item La $S^1\subset \mathbb C$ være enhetsirkelen
+        \[
+            S^1 = \{ z\in \mathbb C\mid |z| = 1\}.
+        \]
+        \begin{enumerate}
+            \item Vis at $S^1$ er en gruppe under (kompleks) multiplikasjon.
+            \item La $n$ være et heltall og la $\mu_n\subset S^1$ være mengden av $n$-te
+                enhetrøtter
+                \[
+                    \mu_n = \{
+                        e^{\frac k n 2\pi i}
+                        \mid k\in \mathbb Z
+                    \}.
+                \]
+                Vis at $\# \mu_n = n$ og at $\mu_n$ er en delgruppe av $S^1$.
+            \item Ta for deg $\mu_3, \mu_4$ og $\mu_{12}$.
+                Vis at $f\colon \mu_{12}\to \mu_3\times \mu_4$
+                gitt ved
+                \[
+                    e^{\frac k {12} 2\pi i}
+                    \mapsto (e^{\frac k 3 2\pi i}, e^{\frac k 4 2\pi i})
+                \]
+                er en isomorfi.
+
+                Det finnes en slik isomorfi $\mu_{nm}\to \mu_n\times \mu_m$
+                så lenge $\mathrm{gcd}(n,m) = 1$.
+            \item Vis at det ikke finnes noen isomorfi $\mu_4\to \mu_2\times\mu_2$.
+        \end{enumerate}
+    \item Ta for deg gruppen $\mathrm{Bij}(S)$ av bijeksjoner $S\to S$
+        hvor $S$ er en endelig mengde.
+        Vi så at om vi har en bijeksjon $f\colon S\to S^\prime$
+        så er avbildningen
+        $\tilde f\colon \mathrm{Bij}(S)\to \mathrm{Bij}(S^\prime)$
+        gitt ved $\sigma\mapsto f\circ \sigma \circ f^{-1}$
+        for hver $(\sigma\colon S\to S)\in\mathrm{Bij}(S)$
+        en bijeksjon.
+        \begin{enumerate}
+            \item Vis at $\tilde f$ er en morfi.
+                Det følger dermed at at $\tilde f$ er en isomorfi.
+            \item Vis (ved induksjon) at om $S, S^\prime$ er to endelige mengder
+                slik at $\# S = \# S^\prime$.
+                Da finnes det en bijeksjon $S\to S^\prime$.
+        \end{enumerate}
+        Vi har nå sett at om to endelige mengder $S, S^\prime$
+        har samme antall elementer så er gruppene av bijeksjoner
+        $\mathrm{Bij}(S), \mathrm{Bij}(S^\prime)$ isomorfe.
+        La $n = \# S$.
+        Vi gir denne gruppen det generelle navnet
+        \textit{gruppen av permutasjoner av $n$ elementer}
+        $S_n = \mathrm{Bij}(\{1,\dots,n\})$.
+        \begin{enumerate}[resume]
+            \item Vis at $\# S_n = n!$.
+        \end{enumerate}
+    \item La $G$ være en endelig gruppe.
+        En nært beslektet mengde til $S_n$ er mengden
+        $\mathrm{Aut}(G) = \mathrm{Iso}(G, G)$
+        av isomorfier $G\to G$, såkalte \textit{automorfier} av $G$.
+        \begin{enumerate}
+            \item Vis at $(\mathrm{Aut}(G), \circ)$ er en gruppe.
+            \item Vis at om en bijeksjon $f\colon G\to H$ er en isomorfi,
+                så er $\tilde f\colon \mathrm{Aut}(G)\to \mathrm{Aut}(H)$
+                en isomorfi.
+            \item Vis at $\mathrm{Aut}(\mu_4)$ ikke er isomorf
+                med $\mathrm{Aut}(\mu_2\times\mu_2)$.
+                [Merk at $\#\mathrm{Aut}(\mu_4) = 2$.]
+        \end{enumerate}
 \end{enumerate}
 
