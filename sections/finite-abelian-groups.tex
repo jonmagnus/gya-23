@@ -1,17 +1,6 @@
 \section{Endelige abelske grupper}
 
-\begin{definition}
-    La $G$ være en gruppe.
-    En undergruppe $H\subset G$ er \textit{ekte}
-    om $H\neq \{e\}$ og $H\neq G$.
-
-    En gruppe $G$ er \textit{simpel} om $G$ ikke har noen ekte undergrupper.
-\end{definition}
-
-\begin{theorem}
-    Om $A$ er en endelig abelsk gruppe, og $\# A$ er et primtall,
-    da er $A$ simpel.
-\end{theorem}
+\subsection{Fermats lille teorem}
 
 \begin{lemma}\label{thm:binomial-identity}
     La $x,y\in \mathbb Z$  og $n \geq 1$ være heltall.
@@ -77,6 +66,43 @@ for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følg
     og det er bare \`en morfi $\mathbb Z / p\to \mathbb Z / p$
     som tilfredsstiller dette, nemlig identiteten $\id_{\mathbb Z / p}$,
     så $\pi_p = \id_{\mathbb Z / p}$.
+\end{proof}
+
+\subsection{Klassifisering av endelige abelske grupper}
+Vi har allerede sett at alle endelige sykliske grupper kan skrives på formen
+$\mathbb Z / n$ for et heltall $n$.
+Vi ønsker å generalisere dette til alle endelige abelske grupper.
+Vi har sett at det finnes endelige abelske grupper som ikke er sykliske
+slik som $\mathbb Z / 2\times \mathbb Z / 2$ og genereres av minst to elementer.
+Andre grupper som vi genererer av to elementer kan vise seg å være sykliske derimot,
+slik som $\mathbb Z / 2\times \mathbb Z / 3 \cong \mathbb Z / 6$.
+Som en konsekvens av \cref{thm:chinese-remainder} kan vi vise
+\begin{corollary}
+    La $p_1,\dots,p_n$ være primtall slik at $p_i \neq p_j$
+    for alle $i\neq j$,
+    og la $r_1,\dots,r_n$ være heltall.
+    Da har vi en isomorfi
+    \[
+        \mathbb Z / (p_1^{r_1}\dots p_n^{r_n})
+        \cong
+        \mathbb Z / p_1^{r_1}\times\dots\times\mathbb Z / p_n^{r_n}.
+    \]
+\end{corollary}
+
+Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
+\begin{theorem}
+    La $A$ være en endelig abelsk gruppe med $n = \# A$.
+    Da finnes det primtall $p_1,\dots, p_m$,
+    eksponenter $r_1,\dots,r_m$,
+    og en isomorfi
+    \[
+        \mathbb Z / p_1^{r_1} \times \dots \times\mathbb Z / p_m^{r_m}
+        \to A.
+    \]
+\end{theorem}
+\begin{proof}
+    \todo[inline]{Bevis dette ved å velge et minste antall generatorer
+    og bruk induksjon}
 \end{proof}
 
 \subsubsection*{Oppgaver}

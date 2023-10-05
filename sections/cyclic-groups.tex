@@ -135,7 +135,7 @@
     så vi har en isomorfi $\mathbb Z / n \to \mu_n$.
 \end{example}
 
-\begin{theorem}[Kinesisk restteorem]
+\begin{theorem}[Kinesisk restteorem]\label{thm:chinese-remainder}
     La $n\in \mathbb Z$ og la $k_1,\dots, k_r\in \mathbb Z$ være en rekke heltall.
     Vi har naturlige morfier $f_i\colon \mathbb Z\to \mathbb Z / k_i$
     for alle $i=1,\dots,r$.
@@ -234,6 +234,29 @@
         \begin{enumerate}
             \item Vis at $H$ er abelsk.
             \item Vis at $H$ er en normal undergruppe.
+        \end{enumerate}
+    \item La $n, m$ være heltall.
+        Vi har sett at om $m\mid n$ så finnes en injeksjon
+        $\mathbb Z / m \hookrightarrow \mathbb Z / n$
+        som identifiserer $\mathbb Z / m$ som en undergruppe av $\mathbb Z / n$.
+        \begin{enumerate}
+            \item Vis at dersom $\mathrm{gcd}(n, m) = 1$ så er den eneste morfien
+                $\mathbb Z / m \to \mathbb Z / n$ den som sender hele
+                $\mathbb Z / m$ på $0$.
+            \item Vis at dersom $\mathrm{gcd}(n, m) = d$ så kan alle morfier
+                $f\colon \mathbb Z / m \to \mathbb Z / n$ faktoriseres som
+                \[
+                    \mathbb Z / m
+                    \xrightarrow{g} \mathbb Z / d
+                    \xhookrightarrow{i} \mathbb Z / n,
+                \]
+                det vil si $f$ kan skrives som $f = i\circ g$.
+        \end{enumerate}
+        La $G$ være en gruppe. En \textit{ekte} undergruppe $H \subset G$
+        er en undergruppe slik at $H\neq \{e_H\}$ og $H\neq G$.
+        \begin{enumerate}[resume]
+            \item Vis at $\mathbb Z / p$ ikke har noen ekte undergrupper.
+                En gruppe uten ekte undergrupper kalles en \textit{simpel} gruppe.
         \end{enumerate}
 \end{enumerate}
 Ta for deg en endelig syklisk gruppe $\mathbb Z / n\mathbb Z$.

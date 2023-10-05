@@ -78,6 +78,19 @@ Vi forkorter ofte også $g\ast h$ som $gh$.
 \end{example}
 
 \begin{example}
+    Mengden bestående av ett element $G = \{0\}$ er en gruppe under
+    den eneste mulige avbildningen $G\times G\to G$.
+    Denne kalles den \textit{trivielle gruppen} og benevnes ofte bare som $0 = G$.
+    Akkurat som vi alltid har en inklusjon av den tomme mengden i en mengde
+    $\emptyset \subset S$,
+    har alltid en inklusjon av den trivielle gruppen $0\hookrightarrow H$
+    til en annen $H$ ved å sende $0\mapsto e_H$.
+
+    Merk at den tomme mengden $\emptyset$ ikke er en gruppe
+    siden den ikke har et identitetelement.
+\end{example}
+
+\begin{example}
     Om $(G, \ast_G), (H, \ast_H)$ er to grupper så danner $(G\times H, \ast)$
     en gruppe hvor $\ast$ er operatoren
     \[
@@ -135,6 +148,32 @@ I tillegg til bildet $\im f\subset H$ kan vi lage en annen undergruppe.
     så $g^{-1}\in\ker f$.
 \end{proof}
 
+\begin{corollary}
+    La $f\colon G\to H$ være en morfi slik at $\ker f = \{e_G\}$
+    (skriver ofte $\ker f = 0$).
+    Da er $f$ injektiv.
+\end{corollary}
+\begin{proof}
+    Anta det finnes $g,g^\prime$ slik at $f(g) = f(g^\prime)$.
+    Da har vi at
+    \[
+        f(g^{-1}g^\prime) = {f(g)}^{-1}f(g^\prime) = e_H,
+    \]
+    så $g^{-1}g^\prime\in \ker f$,
+    men $\ker f = \{e_G\}$, så $g = g^\prime$.
+\end{proof}
+
+Vi så med mengder at om $f\colon A\to B$ er en bijeksjon så finnes
+det en avbildning $g\colon B\to A$ slik at $g\circ f = \id_A$
+og $f\circ g = \id_B$.
+Det tilsvarende konseptet for grupper er ``isomorfier'',
+og vi tar denne egenskapen som definisjonen.
+\begin{definition}
+    En morfi $f\colon G\to H$ er en \textit{isomorfi}
+    dersom det finnes en morfi $g\colon H\to G$ slik at
+    $g\circ f = \id_G$ og $f\circ g = \id_H$.
+\end{definition}
+
 \begin{definition}
     La $(G, \ast_G), (H, \ast_H)$ være to grupper.
     Vi kan definere en operator $\ast_{G\times H}$
@@ -184,6 +223,22 @@ Merk også at $\im (\id_G\times e_H) = \ker q$.
     \item Vis at for en morfi $f\colon G\to H$
         så har vi for alle $g\in G$ at $f(g^{-1}) = {f(g)}^{-1}$.
     \item Vis at for en morfi $f\colon G\to H$ så er $\im f\subset H$ en undergruppe.
+    \item
+        \begin{enumerate}
+            \item La $f\colon G\to H$ være en bijektiv morfi.
+                Vis at den bijektive inversen $f^{-1}\colon H\to G$
+                er en morfi, altså er $f$ er isomorfi.
+        \end{enumerate}
+        En morfi $f\colon G\to H$ kalles en \textit{monomorfi}
+        om det finnes en morfi $g\colon H\to G$ slik at $g\circ f=\id_G$.
+        En morfi kalles en \textit{epimorfi} om det finnes en morfi
+        $h\colon H\to G$ slik at $f\circ h = id_H$.
+        \begin{enumerate}[resume]
+            \item Vis at $f\colon G\to H$ er en monomorfi hvis og bare hvis $f$
+                er en injektiv morfi.
+            \item Vis at $f\colon G\to H$ er en epimorfi hvis og bare hvis $f$
+                er en surjektiv morfi.
+        \end{enumerate}
 \end{enumerate}
 Så langt har vi sett mange eksempler på uendelige grupper,
 slik som $\mathbb C$ og dens undergrupper.
@@ -217,6 +272,8 @@ det vil si grupper hvor den underliggende mengden er endelig.
                 Det finnes en slik isomorfi $\mu_{nm}\to \mu_n\times \mu_m$
                 så lenge $\mathrm{gcd}(n,m) = 1$.
             \item Vis at det ikke finnes noen isomorfi $\mu_4\to \mu_2\times\mu_2$.
+            \item La $n, m$ være to heltall slik at $m | n$.
+                Vis at $\mu_m\subset \mu_n$ er en undergruppe.
         \end{enumerate}
     \item Ta for deg gruppen $\mathrm{Bij}(S)$ av bijeksjoner $S\to S$
         hvor $S$ er en endelig mengde.
