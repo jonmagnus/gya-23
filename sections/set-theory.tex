@@ -335,3 +335,277 @@ for alle $(a,b)\in \Gamma$.
         \end{enumerate}
 \end{enumerate}
 
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw[fill=lightgray] (0,0) circle (1);
+            \draw (0,0) node {A};
+        \end{tikzpicture}
+        \caption{En mengde $A$}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw[fill=lightgray] (0,0) circle (1.5);
+            \draw[fill=gray] (.5,0) circle (.8);
+            \draw (-.6,0) node {A};
+            \draw (.5, 0) node {B};
+        \end{tikzpicture}
+        \caption{$B\subset A$}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \coordinate (a) at (0,0);
+            \coordinate (b) at (1.3, 0);
+            \begin{scope}
+                \clip (b) circle (1);
+                \fill[lightgray] (a) circle (1);
+            \end{scope}
+            \draw (a) node{A} circle(1);
+            \draw (b) node{B} circle(1);
+        \end{tikzpicture}
+        \caption{$A\cap B$}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \coordinate (a) at (0,0);
+            \coordinate (b) at (1.3, 0);
+            \fill[lightgray] (a) circle (1)
+                (b) circle (1);
+            \draw (a) node{A} circle(1);
+            \draw (b) node{B} circle(1);
+        \end{tikzpicture}
+        \caption{$A\cup B$}
+    \end{subfigure}
+    \begin{subfigure}[b]{.3\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \coordinate (a) at (0,0);
+            \coordinate (b) at (1.3, 0);
+            \begin{scope}[even odd rule]
+                \clip (a) circle (1) (b) circle (1);
+                \fill[lightgray] (a) circle (1);
+            \end{scope}
+            \draw (a) node{A} circle(1);
+            \draw (b) node{B} circle(1);
+        \end{tikzpicture}
+        \caption{$A\setminus B$}
+    \end{subfigure}
+    \begin{subfigure}[b]{.38\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \coordinate (a) at (0,0);
+            \coordinate (b) at (2, 0);
+            \draw[fill=lightgray] (a) node{A} circle(.9);
+            \draw[fill=lightgray] (b) node{B} circle(.9);
+        \end{tikzpicture}
+        \caption{$A\cap B=\emptyset$}
+    \end{subfigure}
+    \caption{Konsepter om mengder.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}
+                \draw (0,0) node (a1) {$a_1$}
+                    ++(0,-1) node (a2) {$a_2$}
+                    ++(0,-1) node (a3) {$a_3$};
+                \draw (a2) ellipse (.8 and 2);
+            \end{scope}
+            \begin{scope}[xshift=2cm]
+                \draw (0,0) node (b1) {$b_1$}
+                    ++(0,-1) node (b2) {$b_2$}
+                    ++(0,-1) node (b3) {$b_3$};
+                \draw (b2) ellipse (.8 and 2);
+            \end{scope}
+            \draw[->] (a1) -- (b1);
+            \draw[->] (a2) -- (b2);
+            \draw[->] (a3) -- (b3);
+        \end{tikzpicture}
+        \caption{En bijeksjon.}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}
+                \draw (0,0) node (a1) {$a_1$}
+                    ++(0,-1) node (a2) {$a_2$}
+                    ++(0,-1) node (a3) {$a_3$};
+                \draw (a2) ellipse (.8 and 2);
+            \end{scope}
+            \begin{scope}[xshift=2cm]
+                \draw (0,0) node (b1) {$b_1$}
+                    ++(0,-1) node (b2) {$b_2$}
+                    ++(0,-1) node (b3) {$b_3$};
+                \draw (b2) ellipse (.8 and 2);
+            \end{scope}
+            \draw[->] (a1) -- (b1);
+            \draw[->] (a2) -- (b2);
+            \draw[->] (a3) -- (b2);
+        \end{tikzpicture}
+        \caption{Hverken en injeksjon eller surjeksjon.}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}
+                \draw (0,0) node (a1) {$a_1$}
+                    ++(0,-1) node (a2) {$a_2$}
+                    ++(0,-1) node (a3) {$a_3$};
+                \draw (a2) ellipse (.8 and 2);
+            \end{scope}
+            \begin{scope}[xshift=2cm]
+                \draw (0,0) node (b1) {$b_1$}
+                    ++(0,-1) node (b2) {$b_2$}
+                    ++(0,-1) node (b3) {$b_3$}
+                    ++(0,-1) node (b4) {$b_3$};
+                \path (b2) -- (b3) coordinate[midway] (c){};
+                \draw (c) ellipse (.8 and 2.5);
+            \end{scope}
+            \draw[->] (a1) -- (b1);
+            \draw[->] (a2) -- (b2);
+            \draw[->] (a3) -- (b3);
+        \end{tikzpicture}
+        \caption{En injeksjon.}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}
+                \draw (0,0) node (a1) {$a_1$}
+                    ++(0,-1) node (a2) {$a_2$}
+                    ++(0,-1) node (a3) {$a_3$}
+                    ++(0,-1) node (a4) {$a_4$};
+                \path (a2) -- (a3) coordinate[midway] (c);
+                \draw (c) ellipse (.8 and 2.5);
+            \end{scope}
+            \begin{scope}[xshift=2cm]
+                \draw (0,0) node (b1) {$b_1$}
+                    ++(0,-1) node (b2) {$b_2$}
+                    ++(0,-1) node (b3) {$b_3$};
+                \draw (b2) ellipse (.8 and 2);
+            \end{scope}
+            \draw[->] (a1) -- (b1);
+            \draw[->] (a2) -- (b2);
+            \draw[->] (a3) -- (b3);
+            \draw[->] (a4) -- (b3);
+        \end{tikzpicture}
+        \caption{En surjeksjon.}
+    \end{subfigure}
+    \caption{Konsepter om avbildninger.}
+\end{figure}
+
+\subsection{Mengdelære i kryptografi}
+
+Mengdelære er et veldig fundamentalt område innen matematikken,
+men enda kan vi bruke noen av disse primitive redskapene til å si noe om
+kryptografiske metoder.
+
+Vi har sett fire kategorier av kryptografiske metoder,
+nemlig
+\begin{itemize}
+    \item hashing,
+    \item symmetrisk kryptering,
+    \item asymmetrisk kryptering, og
+    \item nøkkelutveksling.
+\end{itemize}
+Disse kan alle beskrives som avbildninger,
+og vi kan allerede si at disse avbildningene må tilfredsstille visse egenskaper,
+men først må vi definere mengdene disse avbildningene avbilder imellom.
+
+Ofte er det tre mengder vi har i tankene,
+\begin{itemize}
+    \item $\mathscr M$ -- mengden av meldinger som Alice og Bob kan tenke seg å
+        sende.
+        Dette kan være mengden av alle tekster som kan tenkes og skrives,
+        eller det kan være en forhåndsbestemt mengde av bare et fåtall uttrykk,
+        slik som $\{\mathrm{Ja}, \mathrm{Nei}\}$.
+    \item $\mathscr K$ -- mengden av nøkler som kan velges av Alice og Bob.
+    \item $\mathscr C$ -- mengden av mulige chiffertekster.
+\end{itemize}
+
+\subsubsection{Hash-funksjoner}
+En hashfunksjon i generell forstand er bare en avbildning $h\colon \mathscr M\to \mathscr C$.
+Ofte ønsker vi noe som heter en \textit{perfekt} hash som vil si at om vi har to forskjellige
+meldinger $m\neq m^\prime\in \mathscr M$ så hashes meldingene til forskjellige
+chiffertekster $h(m)\neq h(m^\prime)\in \mathscr C$.
+I kryptografi er det ofte tilstrekkelig at det ikke er ``for mange'' meldinger
+som har samme chiffertekst,
+men vi stiller ofte andre strenge krav til hvordan chifferteksten skal
+skille seg mellom ulike meldinger.
+
+\subsubsection{Symmetrisk kryptering}
+En symmetrisk krypteringsalgoritme er to avbildninger
+$f\colon \mathscr M\times \mathscr K\to \mathscr C$
+og $g\colon \mathscr C\times \mathscr Kt\to \mathscr M$
+slik at for alle $m\in \mathscr M$ og $k\in \mathscr K$
+har vi $g(f(m, k),k) = m$.
+Om vi velger en fast nøkkel $k\in \mathscr K$ kan vi definere
+to nye funksjoner
+\[
+    f_k\colon \begin{cases}
+        \mathscr M\to \mathscr C
+        \\
+        m\mapsto f(m, k)
+    \end{cases}
+\]
+og
+\[
+    g_k\colon \begin{cases}
+        \mathscr C\to \mathscr M
+        \\
+        c\mapsto g(c, k),
+    \end{cases}
+\]
+så $g_k\circ f_k = \id_{\mathscr M}$.
+Spesielt betyr dette at $f_k$ må være injektiv,
+og $g_k$ blir dermed surjektiv.
+
+\subsubsection{Asymmetrisk kryptering}
+En asymmetrisk algoritme er nesten  det samme,
+men nå kan vi tenke oss at $f$ og $g$ bruker
+bare delvis informasjon om nøkkelen.
+Nå kan vi tenke oss en nøkkel $k\in\mathscr K$ som et par
+$k = (k_a, k_b)$ hvor $k_a\in \mathscr K_a$ velges blant
+en mengde private nøkler,
+og $k_b\in \mathscr K_b$ velges blant en mengde offentlige nøkler,
+så $\mathscr K\subset \mathscr K_a\times\mathscr K_b$.
+
+Nå blir de to funksjonene gitt ved
+\[\begin{aligned}
+    f&\colon\mathscr M\times \mathscr K_a\to \mathscr C\\
+    g&\colon\mathscr C\times \mathscr K_b\to \mathscr M
+\end{aligned}\]
+slik at $g_{k_b}\circ f_{k_a} = \id_{\mathscr M}$.
+Det som er viktig her er at $(k_a, k_b)$ alltid opptrer i par
+slik at for hver $k_a\in\mathscr K_a$ finnes en unik $k_b\in\mathscr K_b$
+slik at $g_{k_b}\circ f_{k_a} = \id_{\mathscr M}$ og visa versa.
+Det følger at vi har en bijeksjon $\mathscr K_a\to\mathscr K_b$
+som for hver private nøkkel gir den tilhørende offentlige nøkkelen,
+men denne bijeksjonen må være umulig å beregne for at algoritmen skal være sikker.
+Merk at $\mathcal K\subset \mathcal K_a\times \mathcal K_b$ er grafen til denne bijeksjonen.
+For at algoritmen skal være brukbar må det derimot være mulig å trekke tilfeldige
+nøkkelpar $(k_a, k_b)$ fra $\mathcal K$.
+
+\subsubsection{Nøkkelutveksling}
+I klassisk Diffie-Hellman er algoritmen for Alice og Bob identisk,
+så vi har to funksjoner
+\[\begin{aligned}
+    f&\colon \mathscr K\times\mathscr K\to \mathscr K
+    \\
+    g&\colon \mathscr K\to \mathscr K
+\end{aligned}\]
+slik at om Alice velger en nøkkel $k_a$ og Bob en nøkkel $k_b$
+har vi $f(k_a, g(k_b)) = f(k_b, g(k_a))$.
+Her er $g(k_a$ Alice sin offentlige nøkkel som hun deler med Bob,
+og $g(k_b)$ er Bob sin offentlige nøkkel som han deler med Alice.
+For algoritmens sikkerhet er det viktig at man ikke kan regne ut
+$k$ fra $g(k)$, og at gitt $g(k_a)$ og $g(k_b)$
+kan vi ikke regne ut $f(k_a, g(k_b))$.
