@@ -77,7 +77,7 @@ slik som $\mathbb Z / 2\times \mathbb Z / 2$ og genereres av minst to elementer.
 Andre grupper som vi genererer av to elementer kan vise seg å være sykliske derimot,
 slik som $\mathbb Z / 2\times \mathbb Z / 3 \cong \mathbb Z / 6$.
 Som en konsekvens av \cref{thm:chinese-remainder} kan vi vise
-\begin{corollary}
+\begin{corollary}\label{thm:cyclic-refactoring}
     La $p_1,\dots,p_n$ være primtall slik at $p_i \neq p_j$
     for alle $i\neq j$,
     og la $r_1,\dots,r_n$ være heltall.
@@ -90,8 +90,168 @@ Som en konsekvens av \cref{thm:chinese-remainder} kan vi vise
 \end{corollary}
 
 Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
-\begin{theorem}
-    La $A$ være en endelig abelsk gruppe med $n = \# A$.
+
+\begin{lemma}\label{thm:cycles-divide-maximal}
+    La $A$ være en endelig abelsk gruppe og la $\langle a\rangle$
+    være en syklisk undergruppe av maksimal orden.
+    La $\langle a^\prime\rangle$ være en annen syklisk undergruppe.
+    Da $\#\langle a^\prime\rangle | \#\langle a\rangle$.
+\end{lemma}
+\begin{proof}
+    La $l$ være det minste positive heltallet slik at
+    $\langle a\rangle \cap \langle a^\prime \rangle = \langle la^\prime\rangle$.
+    La $m = \#\langle a\rangle$, $n = \#\langle a^\prime\rangle$,
+    og $d = \mathrm{gcd}(m, l)$.
+    Merk at $\frac n l = \#\langle la^\prime\rangle$.
+    Da har vi $\mathrm{gcd}(m, l / d) = 1$,
+    men $\#\langle \frac {nd} l a^\prime\rangle = l / d$,
+    så
+    \[
+        a\in \langle \frac l d a\rangle
+        \subset \langle a + \frac {nd} l a^\prime\rangle,
+    \]
+    men $\langle a\rangle$ er maksimal,
+    så $l = d$ og $\frac {nd} l a^\prime = na^\prime = 0$.
+    Det følger også at $l | m$, så $n = l\frac n l | m$.
+\end{proof}
+
+\begin{corollary}
+    Let $a, a^\prime\subset A$ slik at $\langle a\rangle$
+    er en maksimal syklisk undergruppe.
+    Da finnes $a^{\prime\prime}$ slik at
+    \[
+        \langle a, a^\prime\rangle
+        = \langle a, a^{\prime\prime}\rangle,
+    \]
+    men $\langle a\rangle \cap \langle a^{\prime\prime}\rangle = 0$.
+\end{corollary}
+\begin{proof}
+    La $l$ være det minste positive heltallet slik at
+    $\langle a\rangle \cap \langle a^\prime\rangle = \langle la^\prime\rangle$.
+    La $k$ være det minste helltallet slik at $ka = la^\prime$.
+    La $n = \# \langle a\rangle$ og $m = \#\langle a^\prime\rangle$,
+    så $m | n$ siden $\langle a\rangle$ er maksimal.
+    Vi har også at $\frac n l la^\prime = \frac n l ka = 0$,
+    så $m | \frac n l k$.
+    Siden $n | m$ følger det at $\frac m n | \frac k l$, så $l | k$.
+    La $a^{\prime\prime} = a^\prime - \frac m l a$.
+    Vi har $a^\prime \in \langle a, a^{\prime\prime}\rangle$.
+
+    La $s$ være det minste positive heltallet slik at
+    $sa^{\prime\prime}\in \langle a\rangle$,
+    så $sa^\prime - s\frac m l a\in \langle a \rangle$,
+    men da må $sa^\prime\in\langle a\rangle$,
+    så $s = l$ og $sa^{\prime\prime} = 0$.
+    Det følger at $\langle a\rangle \cap \langle a^{\prime\prime}\rangle = 0$.
+\end{proof}
+
+\begin{lemma}\label{thm:free-surjection}
+    La $A = \langle a_1,\dots,a_k\rangle$ være en abelsk gruppe.
+    Da har vi en surjektiv morfi
+    \[
+        \phi\colon\mathbb Z^k\to A
+    \]
+    gitt ved $e_i\mapsto a_i$ for alle $i=1,\dots,k$.
+\end{lemma}
+\begin{proof}
+    Merk at $\phi$ er en morfi og $a_i\in \im\phi$,
+    så $\langle a_1,\dots,a_k\rangle\subset \im\phi\subset A$,
+    så $\phi$ er surjektiv.
+\end{proof}
+
+\begin{corollary}\label{thm:maximal-cycle-split}
+    La $A$ være en endelig abelsk gruppe og $a\in A$
+    et element slik at $\langle a\rangle$ er en maksimal syklisk undergruppe.
+    Da har inklusjonen $\iota \colon \langle a\rangle\to A$ en venstre invers
+    $\rho\colon A\to \langle a\rangle$,
+    det vil si $\rho\circ \iota = \id$.
+    Det følger at vi har en isomorfi
+    \[
+        A = \langle a\rangle \times (A / \langle a\rangle).
+    \]
+\end{corollary}
+\begin{proof}
+    La $\langle a_1,\dots, a_k$ være et valg av generatorer for $A$.
+    For hver $i = 1,\dots,k$ velg en $a_i^\prime$
+    slik at $\langle a\rangle\cap \langle a_i^\prime\rangle = 0$
+    og $a_i \in \langle a, a_i^\prime\rangle$.
+    Da har vi at $\langle a, a_1^\prime,\dots,a_k^\prime\rangle = A$,
+    men $\langle a\rangle \cap \langle a_1^\prime,\dots,a_k^\prime\rangle = 0$.
+    Vi påstår sammensetningen
+    \[
+        \langle a\rangle
+        \xhookrightarrow{\iota}
+        A
+        \xrightarrow{\phi}
+        A / \langle a_1^\prime,\dots,a_k^\prime\rangle
+    \]
+    er en isomorfi.
+
+    For injektivitet ser vi at om $\phi(na) = \phi(ma)$,
+    så må $\phi((n - m)a) = 0$, så $na = ma$ siden
+    $\ker\phi = \langle a_1^\prime, \dots, a_k^\prime$.
+
+    For surjektivitet la $b\in A / \langle a_1,\dots,a_k\rangle$.
+    Da finnes en $a^\prime\in A$ slik at
+    $b = \phi(a^\prime)$.
+    Ved \cref{thm:free-surjection} har vi at
+    $a^\prime = c_0 a + c_1 a_1 + \dots + c_k a_k$,
+    så
+    \[
+        b = \phi(a^\prime) = c_0\phi(a)\in \im(\phi\circ\iota).
+    \]
+    La $\rho = {(\phi\circ\iota)}^{-1}\circ \phi$,
+    så $\rho\circ\iota = \id$.
+\end{proof}
+
+\begin{theorem}[Basis-teoremet for endelige abelske grupper]
+    \label{thm:basis-theorem-finite-abelian-groups}
+    Anta at $A$ er en endelig abelsk gruppe.
+    Da finnes en sekvens tall $d_1,d_2,\dots, d_m$ slik at
+    $d_{i + 1} | d_i$ for alle $i = 1,\dots, m - 1$,
+    og en isomorfi
+    \[
+        \mathbb Z / d_1\times\dots\times \mathbb Z / d_m
+        \to A.
+    \]
+\end{theorem}
+\begin{proof}
+    Beviset følger ved en algoritme.
+    La $A_1 = A$ og $\psi_1 = \id_A$.
+    For alle $i\leq 1$ la $a_i$ være et element
+    slik at $\langle a_i\rangle$ er en maksimal syklisk undergruppe av $A_i$.
+    La $d_i = \#\langle a_i\rangle$, så vi har en isomorfi
+    $\mathbb Z / d_i\to \langle a_i\rangle$ gitt ved $1\mapsto a_i$.
+    La $A_{i + 1} = A_i / \langle a_i\rangle$
+    og la $\phi_i\colon A_i\to \mathbb Z / d_i\times A_{i + 1}$ være isomorfien
+    som følger av \cref{thm:maximal-cycle-split},
+    og la $\psi_{i + 1}$ være komposisjonen
+    \[\begin{tikzcd}
+        A
+        \rar{\psi_i}
+        &
+        \mathbb Z / d_1\times\dots\times \mathbb Z / d_{i - 1}\times A_i
+        \rar{\id\times \phi_i}
+        &
+        \mathbb Z / d_1\times \dots \times \mathbb Z / d_i \times A_{i + 1}.
+    \end{tikzcd}\]
+    Vi ser at $\# A_{i + 1} < \# A_i$,
+    så for en endelig $N$ har vi $A_N = 0$ så $\psi_N$ er isomorfien vi er ute etter.
+    Merk at ved hvert steg kan vi identifisere $\phi_i^{-1}(A_{i + 1})$
+    med en undergruppe av $A_i$,
+    så
+    \[
+        d_{i + 1}
+        = \#\langle a_{i + 1}\rangle
+        = \#\langle \phi_i^{-1}(a_{i + 1})\rangle
+        | \#\langle a_i\rangle
+        = d_i
+    \]
+    ved \cref{thm:cycles-divide-maximal}.
+\end{proof}
+
+\begin{corollary}[Klassiske basis-teoremet for endelige abelske grupper]
+    La $A$ være en endelig abelsk gruppe.
     Da finnes det primtall $p_1,\dots, p_m$,
     eksponenter $r_1,\dots,r_m$,
     og en isomorfi
@@ -99,10 +259,11 @@ Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
         \mathbb Z / p_1^{r_1} \times \dots \times\mathbb Z / p_m^{r_m}
         \to A.
     \]
-\end{theorem}
+\end{corollary}
 \begin{proof}
-    \todo[inline]{Bevis dette ved å velge et minste antall generatorer
-    og bruk induksjon}
+    Dette følger direkte fra \cref{thm:basis-theorem-finite-abelian-groups}
+    og \cref{thm:cyclic-refactoring}.
 \end{proof}
 
 \subsubsection*{Oppgaver}
+
