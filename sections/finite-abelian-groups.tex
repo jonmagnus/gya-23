@@ -167,7 +167,7 @@ Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
     det vil si $\rho\circ \iota = \id$.
     Det følger at vi har en isomorfi
     \[
-        A = \langle a\rangle \times (A / \langle a\rangle).
+        A \to \langle a\rangle \times (A / \langle a\rangle).
     \]
 \end{corollary}
 \begin{proof}
@@ -211,8 +211,8 @@ Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
     $d_{i + 1} | d_i$ for alle $i = 1,\dots, m - 1$,
     og en isomorfi
     \[
-        \mathbb Z / d_1\times\dots\times \mathbb Z / d_m
-        \to A.
+        A
+        \to \mathbb Z / d_1\times\dots\times \mathbb Z / d_m.
     \]
 \end{theorem}
 \begin{proof}
@@ -266,4 +266,23 @@ Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
 \end{proof}
 
 \subsubsection*{Oppgaver}
-
+\begin{enumerate}
+    \item La $A$ være en abelsk gruppe. La
+        \[
+            A_{\mathrm{tors}} = \{a\in A\mid \mbox{det finnes $n\in \mathbb Z$ slik at $na = 0$.}\}
+        \]
+        \begin{enumerate}
+            \item Vis at $A_{\mathrm{tors}}$ er en undergruppe av $A$.
+            \item Vis at det finnes en venstre invers til inklusjonen
+                $A_{\mathrm{tors}}\hookrightarrow A$,
+                så vi har en isomorfi
+                \[
+                    \phi \colon A\to A_{\mathrm{tors}}\times (A / A_{\mathrm{tors}}).
+                \]
+            \item La $A_{\mathrm{free}} = \phi^{-1}(0\times (A / A_{\mathrm{tors}})$.
+                Anta det finnes et endelig antall elementer $a_1,\dots,a_k$
+                slik at $\langle a_1,\dots, a_k\rangle = A$.
+                Vis at $A_{\mathrm{free}} \cong \mathbb Z^n$ for et heltall $n$,
+                og vis at $A_{\mathrm{tors}}$ er endelig.
+        \end{enumerate}
+\end{enumerate}
