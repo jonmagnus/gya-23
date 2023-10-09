@@ -37,7 +37,7 @@ for alle $n, m$ kan vi vise \cref{thm:binomial-identity} ved induksjon som følg
     \end{aligned}\]
 \end{proof}
 
-\begin{corollary}{Fermats lille teorem}
+\begin{corollary}[Fermats lille teorem]\label{thm:fermat}
     La $p$ være et primtall.
     Da har vi at
     \[
@@ -285,4 +285,74 @@ Vi ønsker noe i denne stilen som tar hånd om alle endelige abelske grupper.
                 Vis at $A_{\mathrm{free}} \cong \mathbb Z^n$ for et heltall $n$,
                 og vis at $A_{\mathrm{tors}}$ er endelig.
         \end{enumerate}
+\end{enumerate}
+Vi har flere ganger brukt at om vi har en undergruppe
+$H\hookrightarrow G$ og inklusjonen har en venstre invers
+$G\to H$ så har vi en isomorfi $H\times (G / H)\cong G$.
+Dette resultatet passer bedre i en annen kontekst.
+\begin{definition}
+    La $G, G^\prime, G^{\prime\prime}$ være tre grupper
+    si vi har morfier
+    \[\begin{tikzcd}
+        G^\prime
+        \rar{f}
+        &
+        G
+        \rar{g}
+        &
+        G^{\prime\prime}.
+    \end{tikzcd}\]
+    Vi sier denne sekvensen av morfier er \textit{eksakt} i $G$
+    om $\im f = \ker g$.
+
+    For en lengre (mulig uendelig) sekvens av morfier
+    sier vi den er \textit{eksakt}
+    om den er eksakt i hvert ledd.
+\end{definition}
+\begin{enumerate}[resume]
+    \item La $f\colon G\to H$ være en morfi.
+        \begin{enumerate}
+            \item Vis at $f$ er injektiv hvis og bare hvis
+                \[
+                    0\to G\xrightarrow{f} H
+                \]
+                er eksakt.
+            \item Vis at $f$ er surjektiv hvis og bare hvis
+                \[
+                    G\xrightarrow{f} H\to 0
+                \]
+                er eksakt.
+        \end{enumerate}
+    \item En \textit{kort eksakt sekvens} er en eksakt sekvens på
+        formen
+        \[\begin{tikzcd}
+            0
+            \rar
+            &
+            G^\prime
+            \rar{f}
+            &
+            G
+            \rar{g}
+            &
+            G^{\prime\prime}
+            \rar
+            &0.
+        \end{tikzcd}\]
+        En kort eksakt sekvens er \textit{splitt}
+        om det finnes en morfi $h\colon G\to G^\prime$
+        slik at $h\circ f = \id_{G^\prime}$
+        og morfien
+        \[
+            h\times g\colon G\to G^\prime\times G^{\prime\prime}
+        \]
+        er en isomorfi.
+        Vis at følgende er ekvivalente
+        \begin{itemize}
+            \item Det finnes en morfi $h\colon G\to G^\prime$
+                slik at $h\circ f = \id_{G^\prime}$.
+            \item Det finnes en morfi $i\colon G^{\prime\prime}\to G$
+                slik at $g\circ i = \id_{G^{\prime\prime}}$.
+            \item Den korte eksakte sekvensen er splitt.
+        \end{itemize}
 \end{enumerate}

@@ -1,4 +1,4 @@
-\documentclass[norks, draft]{article}
+\documentclass[norks, final]{article}
 
 \usepackage{notes}
 
@@ -9,10 +9,11 @@
 
 \includeonly{%
     sections/set-theory,
-    %sections/group-theory,
-    %sections/cosets,
-    %sections/cyclic-groups,
-    %sections/finite-abelian-groups,
+    sections/group-theory,
+    sections/cosets,
+    sections/cyclic-groups,
+    sections/finite-abelian-groups,
+    %sections/applications,
 }
 
 \begin{document}
@@ -29,26 +30,7 @@
 \include{sections/cosets}
 \include{sections/cyclic-groups}
 \include{sections/finite-abelian-groups}
-
-
-\begin{verbatim}
-- Set theory
-    - ? Russell's paradox
-        - Difference between classes and sets
-- Group theory
-    - Kernel and images of group morphism
-        - A group with trivial kernel is injective
-        - A bijective group morphism is an isomorphism
-    - Abelain groups
-        - Additive notation
-    - Lagrange's theorem
-    - Clasification of finite abelian groups
-    - Diffie-Hellman
-    - RSA
-    - ? Pollard's rho
-    - ? Miller-Rabin
-\end{verbatim}
-
+\include{sections/applications}
 
 \printbibliography
 
