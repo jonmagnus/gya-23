@@ -2,6 +2,61 @@
 
 \subsection{Diffie-Hellman}
 \subsection{RSA}
+
+RSA (Rivest-Shamir-Adleman) \cite{rsa} er en metode for asymmetrisk kryptering
+basert på modulær aritmetikk.
+Algoritmen for kryptering på Alice sin side er som følger:
+\begin{enumerate}
+    \item Velg to primtall $p, q$ og la $n = pq$.
+    \item Velg en $e\in 3,\dots, (p - 1)(q - 1) - 3$ slik at
+        $\mathrm{gcd}(e, (p - 1)(q - 1)) = 1$.
+    \item Beregn $d$ slik at $e d \equiv 1\mod (p - 1)(q - 1)$.
+    \item La $m$ være meldingen til Alice gitt ved et tall $m \in \mathbb Z / n$.
+        Beregn chifferteksten som $M = m^e \mod n$.
+    \item Alice publiserer chifferteksten $M$ sammen med tallet $n$.
+        Tallet $d$ sendes hemmelig og kan brukes til å dekryptere $M$.
+\end{enumerate}
+Gitt $n, M$ og $d$ kan vi enkelt dekryptere meldingen ved å beregne
+$m^\prime = M^d \mod n$.
+Siden $M^d = {(m^e)}^d = m^{ed} = m$ ved \cref{thm:fermat}
+og $\cref{thm:chinese-remainder}.
+
+\susubsection{Eulers totient-funksjon}
+Men hvorfor regner vi modulo $(p - 1)(q - 1)$?
+Tallet kommer av at \textit{Eulers totient-funksjon} $\phi$.
+For et heltall $n$ har vi
+\[
+    \phi(n) = \#\{m\mid 0\leq m < n,\, \mathrm{gcd}(n, m) = 1\}.
+\]
+Merk at dette er det samme som å si at restklassen til $m$
+i $\mathbb Z / n$ har en multiplikativ invers ved Euclids algoritme,
+så $\phi(n) = {(\mathbb Z / n)}^\times$.
+
+For et primtall $p$ har vi åpenbart at $\phi(p) = p - 1$
+siden alle tallene mindre en tallet selv er relativt primisk til $p$.
+For et produkt av primtall $n = pq$ så er et tall $m$ ikke relativt primisk
+hvis og bare hvis $p | m$ eller $q | m$,
+det vil si
+\[
+    m\in\{p, 2p, \dots, (q - 1)p\}\cup \{q, 2q, \dots, (p - 1)q\},
+\]
+så da gjenstår $(pq - 1) - (p - 1) - (q - 1) = (p - 1)(q - 1)$ tall,
+så $\phi(pq) = (p - 1)(q - 1)$.
+
+Merk at dette henger sammen med at ${(\mathbb Z / p)}^\times \cong \mathbb Z / (p - 1)$
+og ${(\mathbb Z / pq)}^\times\cong \mathbb Z / (p - 1)\times \mathbb Z / (q - 1)$.
+
+Merk at vi kan jobbe med en enda mindre gruppe,
+for for et valg av melding $m$ jobber vi bare i den syklsiske undergruppen
+$\langle m\rangle \subset {(\mathbb Z / n)}^\times$.
+I beste fall er dette den største syklsike undergruppen.
+For $n = pq$ har denne orden $\lambda(n) = \mathrm{lcm}(p - 1, q - 1)$ ved
+\cref{thm:chinese-remainder}, og størrelsen på alle andre sykler deller
+$\lambda(n)$, så det rekker å regne modulo $\lambda(n) \leq\phi(n)$.
+Funksjonen $\lambda$ som gir oss størrelsen på den største syklen
+i ${(\mathbb Z / n)}^\times$ for en vilkårlig $n$ kalles
+\textit{Carmichaels totient-funksjon}.
+
 \subsection{Diskrete logaritmer}
 \subsubsection{Kinesisk restteorem}
 \todo[inline]{
