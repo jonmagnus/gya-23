@@ -1,0 +1,47 @@
+\section{Diffie-Hellman}
+
+Diffie-Hellman er en metode for nøkkelutveksling,
+det vil si at to parter Alice og Bob klarer å komme
+frem til en felles hemmelig nøkkel uten at en tredje part
+kan enkelt beregne hva nøkkelen er.
+
+Algoritmen, etter \cite{diffie_new_1976}, er som følger:
+\begin{enumerate}
+    \item Alice og Bob er enige om et primtall $p$
+        og et tall $2 \leq g \leq p - 2$.
+    \item Alice velger et tilfeldig tall $2 \leq a \leq p - 2$
+        og beregner $k_a = g^a \mod p$.
+        Hun sender denne nøkkelen $k_a$ til Bob.
+    \item Bob velger et tilfeldig tall $2 \leq b \leq p - 2$,
+        beregner $k_b = g^b\mod p$
+        og sender nøkkelen $k_b$ til Alice.
+    \item Alice beregner $k_{ab} = k_b^a$
+        og Bob beregner $k_{ab}^\prime = k_a^b$.
+        Siden $k_b^a = g^{ab} = k_a^b$ har vi
+        at $k_{ab} = k_{ab}^\prime$.
+        Dette er Alice og Bob sin felles hemmelige nøkkel.
+\end{enumerate}
+
+Teorien som gjør at dette fungerer er bare at vi jobber i
+${(\mathbb Z / p)}^\times\cong\mathbb Z / (p - 1)$.
+En angriper er interessert i å vite $k_{ab}$ gitt den offentlige informasjonen
+$k_a, k_b, g$ og $p$.
+Tallene $p$ og $g$ er ofte forhåndsbestemt som en del av algoritmen,
+så vi kan tenke oss at en angriper er godt forberedt med dette i tankene.
+Spesielt vil en angriper kunne vite primtallsfaktoriseringen av $p - 1$.
+
+\subsection{Diskrete logaritmer}\label{sec:discrete-logarithms}
+
+Den tenkte måten å angripe algoritmen er å først finne enten $a$ eller $b$
+for å beregne $k_{ab}$.
+Generelt er problemet å finne et tall $n$ slik at $g^n \equiv m\mod p$ gitt
+$g, m$ og $p$ kjent som diskret logaritme-problemet,
+ettersom vi tenker oss at dette definerer en logaritme avbildning
+$\log_g\colon{(\mathbb Z / p)}^\times\to \mathbb Z / p$
+slik at $\log_g(m) = n$.
+Merk at denne sjeldent gir de samme verdiene som den vanlige reelle logaritmen
+$\log\colon \mathbb R^\times\to \mathbb R$.
+Merk også at $g$ må være en generator for ${(\mathbb Z / p)}^\times$
+for at $\log_g(m)$ skal være definert for alle $m\in{(\mathbb Z / p)}^\times$.
+
+\todo[inline]{Splitting fra kinesisk rest}
