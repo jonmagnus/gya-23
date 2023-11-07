@@ -35,13 +35,128 @@ Spesielt vil en angriper kunne vite primtallsfaktoriseringen av $p - 1$.
 Den tenkte måten å angripe algoritmen er å først finne enten $a$ eller $b$
 for å beregne $k_{ab}$.
 Generelt er problemet å finne et tall $n$ slik at $g^n \equiv m\mod p$ gitt
-$g, m$ og $p$ kjent som diskret logaritme-problemet,
+$g, m$ og $p$ kjent som diskret logaritme problemet,
 ettersom vi tenker oss at dette definerer en logaritme avbildning
-$\log_g\colon{(\mathbb Z / p)}^\times\to \mathbb Z / p$
+$\log_g\colon{(\mathbb Z / p)}^\times\to \mathbb Z / (p - 1)$
 slik at $\log_g(m) = n$.
 Merk at denne sjeldent gir de samme verdiene som den vanlige reelle logaritmen
 $\log\colon \mathbb R^\times\to \mathbb R$.
 Merk også at $g$ må være en generator for ${(\mathbb Z / p)}^\times$
 for at $\log_g(m)$ skal være definert for alle $m\in{(\mathbb Z / p)}^\times$.
 
-\todo[inline]{Splitting fra kinesisk rest}
+Anta $g$ er en generator for ${(\mathbb Z / p)}^\times$.
+Da har vi en isomorfi $\phi\colon \mathbb Z / (p - 1)\to {(\mathbb Z / p)}^\times$
+gitt ved $n\mapsto g^n$.
+Denne har da en invers
+$\phi^{-1}\colon {(\mathbb Z / p)}^\times\to \mathbb Z / (p - 1)$,
+som for $g^n$ gir tilbake $n$.
+Om vi kan beregne $\phi^{-1}$ har vi altså løst diskret logaritme problemet,
+men merk at morfien $\phi^{-1}$ er akkurat avbildningen $\log_g$,
+så det å kunne beskrive den multiplikative gruppen ${(\mathbb Z / p)}^\times$
+som en additiv gruppe $\mathbb Z / (p - 1)$
+er ekvivalent til å løse diskret logaritme problemet for en gitt base.
+
+\subsection{Kinesisk rest}
+Selv om vi ikke kan beregne isomorfien
+$\log_g\colon {(\mathbb Z / p)}^\times\to \mathbb Z / (p - 1)$,
+så kan vi utnytte at det finnes en slik isomorfi.
+La $q | p - 1$ være et primtall, og la $d = (p - 1) / q$.
+Da kan vi beregne $k_a^d = g^{ad}$.
+Merk at ${(k_a^d)}^q = g^{a(p - 1)} = 1$,
+så $k_a^d$ kan bare ha \'en av $q$ mulige verdier avhengig
+av verdien til $a^\prime = a\mod q$.
+Altså kan vi finne verdien av $a^\prime$ ved å løse diskret logaritme problemet
+$a^\prime = \log_{g^d}(k_a^d)$ i $\langle g^d\rangle\subset {(\mathbb Z / p)}^\times$.
+
+Det samme holder for høyere potenser av et primtall,
+så om vi har en primtallsfaktorisering $q_1^{r_1}\dots q_k^{r_k} = p - 1$
+kan vi ved \cref{thm:chinese-remainder} finne $a$ om vi klarer å løse
+diskret logaritme problemet for alle delgruppene tilsvarende primtallsfaktorene
+i $p - 1$.
+
+Det er derfor viktig for sikkerheten av Diffie-Hellman at $p - 1$ også har store
+primtallsfaktorer.
+
+\subsection{Pollard rho}
+En standard metode \cite{pollard_monte_1978}
+for å løse diskret logaritme problemet baserer seg på at
+vi kan dele opp søket etter verdien for $a$.
+Vi vet grovt sett at $0\leq a \leq p  - 1$,
+så la $q = \lceil \sqrt{p - 1}\rceil$,
+det vil si $q$ er det minste heltallet større enn $\sqrt {p - 1}$.
+Da finnes heltall $0\leq m < q$ og $0\leq n \leq \lfloor(p - 1) / q\rfloor \leq q$
+slik at $a = nq + m$, så $g^{nq + m} = k_a$.
+Om vi nå lager en tabell over verdiene for $k_a g^{-m}$
+for alle $0\leq m < q$ kan vi gå igjennom verdiene
+$g^{nq}$ for alle $0\leq n\leq q$ og se om verdien dukker opp i tabellen.
+Når vi får et treff har vi verdier $n$ og $m$ slik at,
+$g^{nq} = k_a g^{-m}$,
+altså har vi at $g^{nq + m} = k_a$,
+så $a = nq + m$.
+
+Fordelen med denne metoden er at vi trenger bare å teste med
+$q + (q + 1) \approx 2\sqrt{p - 1}$ tall for $n$ og $m$ sammenlagt,
+isteden for å teste alle $p - 1$ mulige verdier for $a$.
+Ulempen er at vi trenger å holde styr på en tabell med rundt $q$
+verdier, så når $p$ blir dette ofte for mye data å ha kontroll på.
+
+Pollards rho-metode \cite{pollard_monte_1978} deler inn søket på en annen måte.
+Her er tanken at vi går ser på verdien av $g^n k_a^m$ for mange verdier av $n$ og $m$
+helt til vi finner to par $(n,m)$ og $(n^\prime, m^\prime)$ slik at
+\[
+    g^n k_a^m = g^{n^\prime} k_a^{m^\prime}.
+\]
+Dette kan vi skrive om som
+\[
+    g^{n - n^\prime} = k_a^{m^\prime - m}.
+\]
+Isåfall kan vi bruke Euklids algoritme til å finne heltall $l, k$
+slik at $l (p - 1) + k (m^\prime - m) = d$ hvor $d = \mathrm{gcd}(p - 1, m^\prime - m)$.
+Da har vi at
+\[\begin{aligned}
+    g^{(n - n^\prime)k}
+    &= k_a^{(m^\prime - m)k}
+    \\
+    &= k_a^d k_a^{-l(p - 1)}
+    \\
+    &= k_a^d
+\end{aligned}\]
+Siden vi antar det finnes en løsning $g^a = k_a^d$ må vi ha at $d | (n - n^\prime) k$,
+så vi kan beregne $a^\prime = (n - n^\prime) k / d$.
+Det er ikke gitt at $a^\prime = a$,
+siden det finnes flere mulige $d$-te røtter av $g$.
+La $\theta = g^{(p - 1) / d}$ benevne den primitive $d$-te roten til $g$
+i ${(\mathbb Z / p)}^\times$.
+Da finnes \'en $0\leq i < d$ slik at
+$g^{a^\prime} \theta^i = k_a$,
+så $a^\prime + i\frac {p - 1} d = a$.
+
+Denne metoden har to steg som potensielt dominerer kompleksiteten.
+Det første er å finne verdier $(n, m)$ og $(n^\prime, m^\prime)$
+slik at $g^n k_a^m = g^{n^\prime} k_a^{m^\prime}$.
+Det andre er når vi tester alle mulige verdier for $i$
+for å finne riktig rot av $g$.
+
+For sistnevnte er vi reddet av at sjansen for at $d$ skal ha en stor
+primtallsfaktor er omvendt proporsjonal med størrelsen på faktoren,
+så $d$ har mest sannsynlig små faktorer,
+som vi kan løse ved å bruke \cref{thm:chinese-remainder}.
+
+For det førstnevnte steget presenterer Pollard en avbildning (ikke en morfi)
+$\rho \colon {(\mathbb Z / p)}^\times {(\mathbb Z / p)}^\times$
+som er laget på en slik måte at gitt at gitt eksponentene $n, m$
+for $g^n k_a^m$ så kan vi beregne eksponenter $n^\prime, m^\prime$
+slik at $g^{n^\prime} k_a^{m^\prime} = \rho(g^n k_a^m)$.
+
+Tanken her er at $\rho$ oppfører seg som en tilfeldig avbildning,
+og for en ekte tilfeldig avbildning
+$\eta\colon {(\mathbb Z / p)}^\times\to {(\mathbb Z / p)}^\times$
+forventer vi at vi får $\eta^n(1) = \eta^{2n}(1)$
+for en $n$ i størrelsesorden $\sqrt p$.
+Verdien $n$ kalles \textit{epoken} til $\eta$.
+
+Å finne epoken til $\rho$ kan vi gjøre uten å lagre annen informasjon
+enn verdien til $\rho^k(1)$ og $\rho^{2k}(1)$
+for en gitt $k$ ved å iterere
+gjennom alle $k = 1,\dots,n$.
+Dette kalles Floyds algoritme.
