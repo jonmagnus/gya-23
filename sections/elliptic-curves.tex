@@ -198,7 +198,7 @@ tre punkter i skjæringen
     \{y^2 = x^3 + Ax + B\}\cap \{ax + by = c\}.
 \]
 
-\begin{figure}
+\begin{figure}[htb]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
@@ -283,6 +283,10 @@ tre punkter i skjæringen
             }
         \end{axis}
     \end{tikzpicture}
+    \caption{
+        Kurven $C = \{y^2 = x^3 + 1\}\subset \mathbb Z / 5\times \mathbb Z / 5$.
+        Merk at $\#C = 6$ om vi teller med punktet $\infty$.
+    }
 \end{figure}
 
 \subsection{Elliptiske kurver i kryptografi}
@@ -305,5 +309,3 @@ så om vi kan konstruere kurver slik at $\#C$
 har store primtallsfaktorer har vi en erstatning
 for ${(\mathbb Z / p)}^\times$ som er minst like god for beregning av
 til eksempel Diffie-Hellman.
-
-\todo[inline]{Siter indeks kalkulus for hvorfor vi foretrekker elliptiske kurver.}
